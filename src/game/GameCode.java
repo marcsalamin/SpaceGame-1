@@ -5,9 +5,6 @@ public class GameCode {
 	int [][] spaceField;
 	int fieldx = 20;
 	int fieldy = 20;
-	
-	int blabla = 0;
-	
-	int salut = 0;
+
 
 }
