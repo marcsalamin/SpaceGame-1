@@ -1,5 +1,10 @@
 package game;
 
 public class GameCode {
-asdad
+	int spaceShip = 3;
+	int [][] spaceField;
+	int fieldx = 20;
+	int fieldy = 20;
+	
+
 }
