@@ -8,5 +8,6 @@ public class GameCode {
 	
 	int blabla = 0;
 	
+	int salut = 0;
 
 }
