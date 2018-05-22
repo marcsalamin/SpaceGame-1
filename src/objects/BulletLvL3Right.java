@@ -1,10 +1,8 @@
 package objects;
 
-public class BulletLvL3Right {
+public class BulletLvL3Right extends Bullets {
 	BulletLvL3Right (float v){
-		
-		
-		super(v, v);
+		super(OurSpaceShip.getPosition(),v, v);
 	}
 
 }
