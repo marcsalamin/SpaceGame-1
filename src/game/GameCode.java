@@ -19,19 +19,16 @@ public class GameCode extends PortableApplication {
 	public static double height = dimension.getHeight();
 	public static double width  = dimension.getWidth();
 	
-	Point p;
-	Vector <Bullets> b = new Vector<Bullets>();
-	Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
-	OurSpaceShip os;
+	static Vector <Bullets> b = new Vector<Bullets>();
+	static Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
+	static OurSpaceShip os;
 
 	public void generateEnemy(){
-		p.setLocation(Math.random()*width, height);
-		EnemySpaceShip es = new EnemySpaceShip( p, (float) 0,(float) height/20, width/40, 1);
+		EnemySpaceShip es = new EnemySpaceShip(new Point((int)(Math.random()*width),(int) height), (float) 0,(float) height/20, width/40, 1);
 		ves.add(es);
 	}
 	public void generateOurSpaceShip(){
-		p.setLocation(width/2, 0);
-		os = new OurSpaceShip(p,0,0,width/40, 3);
+		os = new OurSpaceShip(new Point((int)width/2,0), (float) 0,(float)0,width/40, 3);
 	}
 
 
@@ -50,8 +47,7 @@ public class GameCode extends PortableApplication {
 	}
 	
 	public static void main(String[] args) {
-		onInit();
-		onGraphicRender()
+		new GameCode();
 	}
 
 }
