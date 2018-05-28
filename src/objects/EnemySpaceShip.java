@@ -41,6 +41,9 @@ public class EnemySpaceShip {
 		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
 		d+=0.1;
 	}
+	public int getHealth(){
+		return hp;
+	}
 
 	
 
