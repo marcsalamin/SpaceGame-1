@@ -10,7 +10,7 @@ public class EnemySpaceShip {
 	private  int hp ;
 	Circle c;
 	double hitBox;
-	EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
+	public EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
