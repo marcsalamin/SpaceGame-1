@@ -1,6 +1,8 @@
 package objects;
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javafx.scene.shape.Circle;
 
@@ -8,10 +10,10 @@ public class OurSpaceShip {
 	private static Point p;
 	private static float Vx, Vy;
 	private Circle c;
-	private double hitBox;
+	private float hitBox;
 	private static int hp;
 	
-	public OurSpaceShip(Point p, float Vx, float Vy, double hitBox, int hp){
+	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
@@ -27,7 +29,7 @@ public class OurSpaceShip {
 	public static void helthDown(){
 		hp--;
 	}
-	public double getHitBox(){
+	public float getHitBox(){
 		return hitBox;
 	}
 	
@@ -35,4 +37,10 @@ public class OurSpaceShip {
 		
 	}
 
+	public void onKeyDown(int keycode) {
+		
+	}
+	
+	public void onKeyUp(int keycode) {
+	}
 }

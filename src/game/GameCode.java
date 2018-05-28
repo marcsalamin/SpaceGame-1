@@ -43,13 +43,23 @@ public class GameCode extends PortableApplication {
 	}
 	
 	@Override
+	public void onKeyDown(int keycode) {
+		super.onKeyDown(keycode);
+		os.onKeyDown(keycode);
+	}
+
+	
+	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.WHITE);
 		
 		for(int i = 0; i< ves.size(); i++){
 			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), (float)ves.get(i).getHitBox(), Color.RED);
+			ves.get(i).tick();
 		}
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),(float)os.getHitBox(), Color.BLUE);
+		os.ticks();
+		
 	}
 	
 	public static void main(String[] args) {
