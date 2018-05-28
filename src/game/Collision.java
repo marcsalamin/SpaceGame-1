@@ -30,13 +30,10 @@ public class Collision {
 					}
 				}
 				if(p2.distance(p3)<h2+h3){
-					GameCode.ves.get(j).helthDown();
+					GameCode.ves.removeElementAt(j);
 					GameCode.os.helthDown();
 					if(GameCode.os.getHealth()<1){
 						//lost
-					}
-					if(GameCode.ves.get(j).getHealth()<1){
-						GameCode.ves.removeElementAt(j);
 					}
 					
 				}
