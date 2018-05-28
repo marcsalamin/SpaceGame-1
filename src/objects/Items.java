@@ -3,7 +3,7 @@ package objects;
 import java.awt.Point;
 
 public class Items {
-	enum  Utility {munUpgrade, shield}
+	enum  Utility {munUpgrade, shield, life}
 	Point p;
 	float Vx;
 	float Vy;
