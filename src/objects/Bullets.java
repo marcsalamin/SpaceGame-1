@@ -24,6 +24,7 @@ public class Bullets {
 		 this.c= new Circle(p.getX(),p.getY(),hitBox);
 		 this.s = s;
 		 this.damage = damage;
+		 //fasdfads
 	 }
 
 }
