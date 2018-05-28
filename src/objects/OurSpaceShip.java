@@ -11,7 +11,7 @@ public class OurSpaceShip {
 	private float hitBox;
 	private static int hp;
 	
-	public OurSpaceShip(Point p, float Vx, float Vy, double hitBox, int hp){
+	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
