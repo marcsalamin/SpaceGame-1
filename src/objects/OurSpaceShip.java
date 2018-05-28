@@ -36,6 +36,9 @@ public class OurSpaceShip {
 	public void ticks(){
 		
 	}
+	public int getHealth(){
+		return hp;
+	}
 
 	public void onKeyDown(int keycode) {
 		
