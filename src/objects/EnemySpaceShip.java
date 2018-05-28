@@ -2,20 +2,23 @@ package objects;
 
 import java.awt.Point;
 
+import game.GameCode;
 import javafx.scene.shape.Circle;
 
 public class EnemySpaceShip {
 	
 	Point p;
 	float Vx, Vy;
-	private  int hp ;
 	Circle c;
 	double hitBox;
+	private int hp;
+	
 	public EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
 		this.c= new Circle(p.getX(),p.getY(),hitBox);
+		this.hp = hp;
 	}
 	
 	public Point getPosition(){
@@ -26,7 +29,7 @@ public class EnemySpaceShip {
 		this.hp--;
 	}
 	public void changeVx(EnemySpaceShip e, double d){
-		e.Vx=(float)Math.sin(d);
+		e.Vx=(float)(Math.sin(d)*GameCode.width/40);
 	}
 	
 
