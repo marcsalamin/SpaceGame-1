@@ -11,8 +11,7 @@ public class EnemySpaceShip {
 	private  int hp ;
 	Circle c;
 	double hitBox;
-	
-	EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
+	public EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
@@ -20,11 +19,7 @@ public class EnemySpaceShip {
 	}
 	
 	public Point getPosition(){
-<<<<<<< HEAD
-		return p;
-=======
 		return this.p;
->>>>>>> branch 'master' of https://github.com/marcsalamin/SpaceGame-1.git
 	}
 	
 	public void helthDown(){
