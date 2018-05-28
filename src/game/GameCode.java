@@ -28,11 +28,11 @@ public class GameCode extends PortableApplication {
 	}
 
 	public void generateEnemy(){
-		EnemySpaceShip es = new EnemySpaceShip(new Point((int)(Math.random()*width),(int) (3*height/4)), (float) 0,(float) 1, width/40, 1);
+		EnemySpaceShip es = new EnemySpaceShip(new Point((int)(Math.random()*width),(int) (3*height/4)), (float) 0,(float) 1, width/80, 1);
 		ves.add(es);
 	}
 	public void generateOurSpaceShip(){
-		os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/40, 3);
+		os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3);
 	}
 
 
