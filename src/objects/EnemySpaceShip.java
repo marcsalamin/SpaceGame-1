@@ -32,6 +32,10 @@ public class EnemySpaceShip {
 		this.hp--;
 	}
 	
+	public double getHitBox(){
+		return hitBox;
+	}
+	
 	public void tick(){
 		this.Vx=(float)(Math.sin(d)*GameCode.width/40);
 		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
