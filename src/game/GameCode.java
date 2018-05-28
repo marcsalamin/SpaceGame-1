@@ -26,7 +26,7 @@ public class GameCode extends PortableApplication {
 	}
 	public void generateOurSpaceShip(){
 		p.setLocation(width/2, 0);
-		OurSpaceShip us = new OurSpaceShip(p);
+		OurSpaceShip us = new OurSpaceShip(p,0,0,width/40, 3);
 	}
 
 

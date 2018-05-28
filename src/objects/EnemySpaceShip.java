@@ -20,6 +20,7 @@ public class EnemySpaceShip {
 		this.hitBox = hitBox;
 		this.c= new Circle(p.getX(),p.getY(),hitBox);
 		this.hp = hp;
+		this.hitBox = hitBox;
 	}
 	
 	public Point getPosition(){
