@@ -6,19 +6,20 @@ import game.GameCode;
 import javafx.scene.shape.Circle;
 
 public class Bullets {
-	
- 
-	 Point p;
-	 float Vx;
-	 float Vy;
-	 double hitBox = GameCode.height / 40;
-	 Circle c;
+	enum State  {FRIEND, ENEMY};
+	State s;
+	Point p;
+	float Vx;
+	float Vy;
+	double hitBox = GameCode.height / 40;
+	Circle c;
 	 
-	 Bullets(Point p, float Vx, float Vy){ 
+	 Bullets(Point p, float Vx, float Vy , State s){ 
 		 this.p = p;
 		 this.Vx = Vx;
 		 this.Vy = Vy;
 		 this.c= new Circle(p.getX(),p.getY(),hitBox);
+		 this.s = s;
 	 }
 
 }

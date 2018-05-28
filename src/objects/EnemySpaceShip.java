@@ -20,7 +20,11 @@ public class EnemySpaceShip {
 	}
 	
 	public Point getPosition(){
+<<<<<<< HEAD
 		return p;
+=======
+		return this.p;
+>>>>>>> branch 'master' of https://github.com/marcsalamin/SpaceGame-1.git
 	}
 	
 	public void helthDown(){
