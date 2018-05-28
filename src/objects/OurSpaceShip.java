@@ -8,7 +8,7 @@ public class OurSpaceShip {
 	private static Point p;
 	private static float Vx, Vy;
 	private Circle c;
-	private double hitBox;
+	private float hitBox;
 	private static int hp;
 	
 	public OurSpaceShip(Point p, float Vx, float Vy, double hitBox, int hp){
@@ -27,12 +27,15 @@ public class OurSpaceShip {
 	public static void helthDown(){
 		hp--;
 	}
-	public double getHitBox(){
+	public float getHitBox(){
 		return hitBox;
 	}
 	
 	public void ticks(){
 		
+	}
+	public int getHealth(){
+		return hp;
 	}
 
 }

@@ -22,6 +22,13 @@ public class Collision {
 					}
 					
 				}
+				if(p1.distance(p3)<h1+h3){
+					GameCode.b.removeElementAt(i);
+					GameCode.os.helthDown();
+					if(GameCode.os.getHealth()<1){
+						//lost
+					}
+				}
 				
 			}
 		}
