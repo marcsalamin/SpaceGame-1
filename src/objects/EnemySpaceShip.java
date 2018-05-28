@@ -17,7 +17,7 @@ public class EnemySpaceShip {
 		this.c= new Circle(p.getX(),p.getY(),hitBox);
 	}
 	
-	public  Point getPosition(){
+	public Point getPosition(){
 		return this.p;
 	}
 	public  void helthDown(){
