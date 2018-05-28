@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import org.lwjgl.input.Keyboard;
+
 import javafx.scene.shape.Circle;
 
 public class OurSpaceShip {
@@ -33,15 +35,26 @@ public class OurSpaceShip {
 		return hitBox;
 	}
 	
-	public void ticks(){
-		
-	}
 	public int getHealth(){
 		return hp;
 	}
-
+	
+	public void ticks(){
+		p.setLocation(p.getX() + Vx, p.getY() + Vy);
+	}
+	
 	public void onKeyDown(int keycode) {
+		switch(keycode){
+		case Keyboard.KEY_UP:
+			Vy ++;
+		case Keyboard.KEY_DOWN:
+			Vy--;
+		case Keyboard.KEY_LEFT:
+			Vx--;
+		case Keyboard.KEY_RIGHT:
+			Vx++;
 		
+		}
 	}
 	
 	public void onKeyUp(int keycode) {
