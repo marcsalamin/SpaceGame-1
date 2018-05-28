@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
 
 public class Bullets {
 	
-	enum State  {FRIEND, ENEMY};
+	public enum State  {FRIEND, ENEMY};
 	
 	State s;
 	Point p;
@@ -38,6 +38,9 @@ public class Bullets {
 	}
 	public float getHitBox(){
 		return hitBox;
+	}
+	public State getState(){
+		return s;
 	}
 
 }

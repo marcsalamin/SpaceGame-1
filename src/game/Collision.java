@@ -2,7 +2,10 @@ package game;
 
 import java.awt.Point;
 
+import objects.Bullets;
+
 public class Collision {
+	
 	
 	public void tick(){
 		Point p3 = GameCode.os.getPosition();
@@ -18,7 +21,7 @@ public class Collision {
 				float h2 = GameCode.ves.get(j).getHitBox();
 				
 				
-				if(p1.distance(p2)<(h1+h2)){
+				if(p1.distance(p2)<(h1+h2)&&GameCode.b.get(i).getState().equals(Bullets.State.FRIEND)){
 					GameCode.b.removeElementAt(i);
 					GameCode.ves.get(j).helthDown();
 					if(GameCode.ves.get(j).getHealth()<1){
@@ -26,7 +29,7 @@ public class Collision {
 					}
 					
 				}
-				if(p1.distance(p3)<(h1+h3)){
+				if(p1.distance(p3)<(h1+h3)&&GameCode.b.get(i).getState().equals(Bullets.State.ENEMY)){
 					GameCode.b.removeElementAt(i);
 					GameCode.os.helthDown();
 					if(GameCode.os.getHealth()<1){
