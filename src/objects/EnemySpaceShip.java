@@ -19,6 +19,7 @@ public class EnemySpaceShip {
 		this.Vy = Vy;
 		this.c= new Circle(p.getX(),p.getY(),hitBox);
 		this.hp = hp;
+		this.hitBox = hitBox;
 	}
 	
 	public Point getPosition(){
