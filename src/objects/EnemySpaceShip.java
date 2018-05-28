@@ -10,11 +10,11 @@ public class EnemySpaceShip {
 	Point p;
 	float Vx, Vy;
 	Circle c;
-	double hitBox;
+	float hitBox;
 	private int hp;
 	double d;
 	
-	public EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
+	public EnemySpaceShip(Point p,float Vx, float Vy,float hitBox,int hp){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
@@ -32,7 +32,7 @@ public class EnemySpaceShip {
 		this.hp--;
 	}
 	
-	public double getHitBox(){
+	public float getHitBox(){
 		return hitBox;
 	}
 	
