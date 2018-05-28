@@ -25,5 +25,9 @@ public class OurSpaceShip {
 	public static void helthDown(){
 		hp--;
 	}
+	
+	public void ticks(){
+		
+	}
 
 }

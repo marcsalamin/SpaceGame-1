@@ -17,6 +17,7 @@ public class EnemySpaceShip {
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
+		this.hitBox = hitBox;
 		this.c= new Circle(p.getX(),p.getY(),hitBox);
 		this.hp = hp;
 	}
