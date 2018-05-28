@@ -12,6 +12,7 @@ public class EnemySpaceShip {
 	Circle c;
 	double hitBox;
 	private int hp;
+	double d;
 	
 	public EnemySpaceShip(Point p,float Vx, float Vy,double hitBox,int hp){
 		this.p = p;
@@ -30,9 +31,13 @@ public class EnemySpaceShip {
 	public void helthDown(){
 		this.hp--;
 	}
-	public void changeVx(EnemySpaceShip e, double d){
-		e.Vx=(float)(Math.sin(d)*GameCode.width/40);
+	
+	public void tick(){
+		this.Vx=(float)(Math.sin(d)*GameCode.width/40);
+		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
+		d+=0.1;
 	}
+
 	
 
 }
