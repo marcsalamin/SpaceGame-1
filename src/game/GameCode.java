@@ -44,10 +44,8 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onKeyDown(int keycode) {
-		System.out.println("OK");
 		super.onKeyDown(keycode);
 		os.onKeyDown(keycode);
-		System.out.println(keycode);
 	}
 
 	
