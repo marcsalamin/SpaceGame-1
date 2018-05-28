@@ -10,6 +10,8 @@ public class Collision {
 	public void tick(){
 		Point p3 = GameCode.os.getPosition();
 		float h3 = GameCode.os.getHitBox();
+		Point borderScreen1 = new Point(0,0);
+		Point borderScreen2 = new Point((int)GameCode.width,(int)GameCode.height);
 		
 		for (int i =0; i < GameCode.b.size();i++){
 			for(int j = 0; j< GameCode.ves.size();j++){
@@ -43,6 +45,12 @@ public class Collision {
 						//lost
 					}
 					
+				}
+				if(p1.distance(borderScreen1)<20||p1.distance(borderScreen2)<20){
+					GameCode.b.removeElementAt(i);
+				}
+				if(p2.distance(borderScreen1)<20||p2.distance(borderScreen2)<20){
+					GameCode.ves.removeElementAt(j);
 				}
 				
 			}
