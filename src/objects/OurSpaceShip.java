@@ -6,7 +6,9 @@ public class OurSpaceShip {
 	private static Point p;
 	private static int hp;
 	
-	OurSpaceShip(){
+	public OurSpaceShip(Point p){
+		this.p = p;
+		this.hp = 3;
 		
 	}
 	

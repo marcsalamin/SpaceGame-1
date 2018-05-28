@@ -8,6 +8,8 @@ import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import objects.Bullets;
 import objects.EnemySpaceShip;
+import objects.OurSpaceShip;
+import sun.java2d.pipe.OutlineTextRenderer;
  
 
 public class GameCode extends PortableApplication {
@@ -21,6 +23,10 @@ public class GameCode extends PortableApplication {
 		p.setLocation(Math.random()*width, height);
 		EnemySpaceShip es = new EnemySpaceShip( p, (float) 0,(float) height/20, width/40, 1);
 		ves.add(es);
+	}
+	public void generateOurSpaceShip(){
+		p.setLocation(width/2, 0);
+		OurSpaceShip us = new OurSpaceShip(p);
 	}
 
 
