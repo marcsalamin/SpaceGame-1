@@ -5,6 +5,7 @@ import java.awt.Point;
 import javafx.scene.shape.Circle;
 
 public class EnemySpaceShip {
+	
 	Point p;
 	float Vx, Vy;
 	private  int hp ;
@@ -20,7 +21,8 @@ public class EnemySpaceShip {
 	public Point getPosition(){
 		return this.p;
 	}
-	public  void helthDown(){
+	
+	public void helthDown(){
 		this.hp--;
 	}
 	public void changeVx(EnemySpaceShip e, double d){
