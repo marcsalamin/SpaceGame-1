@@ -21,5 +21,8 @@ public class Items {
 	public void helthDown(){
 		hp--;
 	}
+	public void tick(){
+		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
+	}
 
 }

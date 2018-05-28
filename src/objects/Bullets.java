@@ -23,5 +23,8 @@ public class Bullets {
 		 this.c= new Circle(p.getX(),p.getY(),hitBox);
 		 this.s = s;
 	 }
+	public void tick(){
+		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
+	}
 
 }
