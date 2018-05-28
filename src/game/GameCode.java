@@ -28,11 +28,11 @@ public class GameCode extends PortableApplication {
 	}
 
 	public void generateEnemy(){
-		EnemySpaceShip es = new EnemySpaceShip(new Point((int)(Math.random()*width),(int) (3*height/4)), (float) 0,(float) height/20, width/40, 1);
+		EnemySpaceShip es = new EnemySpaceShip(new Point((int)(Math.random()*width),(int) (3*height/4)), (float) 0,(float) 1, width/40, 1);
 		ves.add(es);
 	}
 	public void generateOurSpaceShip(){
-		os = new OurSpaceShip(new Point((int)width/2,(int)height/4), (float) 0,(float)0,width/40, 3);
+		os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/40, 3);
 	}
 
 
@@ -44,8 +44,10 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onKeyDown(int keycode) {
+		System.out.println("OK");
 		super.onKeyDown(keycode);
 		os.onKeyDown(keycode);
+		System.out.println(keycode);
 	}
 
 	
@@ -54,10 +56,10 @@ public class GameCode extends PortableApplication {
 		g.clear(Color.WHITE);
 		
 		for(int i = 0; i< ves.size(); i++){
-			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), (float)ves.get(i).getHitBox(), Color.RED);
+			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
 			ves.get(i).tick();
 		}
-		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),(float)os.getHitBox(), Color.BLUE);
+		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
 		os.ticks();
 		
 	}

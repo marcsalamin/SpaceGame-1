@@ -45,18 +45,26 @@ public class OurSpaceShip {
 	
 	public void onKeyDown(int keycode) {
 		switch(keycode){
-		case Keyboard.KEY_UP:
-			Vy ++;
-		case Keyboard.KEY_DOWN:
-			Vy--;
-		case Keyboard.KEY_LEFT:
-			Vx--;
-		case Keyboard.KEY_RIGHT:
-			Vx++;
+		case KeyEvent.VK_UP:
+			System.out.println("Vy UP");
+			Vy +=5;
+		case KeyEvent.VK_DOWN:
+			System.out.println("Vy DOWN");
+			Vy -=5;
+		case KeyEvent.VK_LEFT:
+			System.out.println("Vx DOWN");
+			Vx -=5;
+		case KeyEvent.VK_RIGHT:
+			System.out.println("Vx UP");
+			Vx +=5;
 		
 		}
 	}
 	
 	public void onKeyUp(int keycode) {
+		if(keycode == Keyboard.KEY_UP || keycode == Keyboard.KEY_DOWN)
+			Vy=0;
+		if(keycode == Keyboard.KEY_LEFT || keycode == Keyboard.KEY_RIGHT)
+			Vx=0;
 	}
 }

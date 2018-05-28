@@ -37,8 +37,9 @@ public class EnemySpaceShip {
 	}
 	
 	public void tick(){
-		this.Vx=(float)(Math.sin(d)*GameCode.width/40);
-		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
+		this.Vx=(float)(Math.sin(d)*5);
+		if(p.getX()+Vx < GameCode.width && p.getY()-Vy > 0)
+			this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy);
 		d+=0.1;
 	}
 	public int getHealth(){
