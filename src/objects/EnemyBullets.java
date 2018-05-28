@@ -6,7 +6,9 @@ public class EnemyBullets extends Bullets{
 
 	EnemyBullets(float Vx, float Vy){
 		super(EnemySpaceShip.getPosition(), Vx, Vy);
-				
+			
+		
+	
 	}
 
 }
