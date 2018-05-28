@@ -23,6 +23,9 @@ public class EnemySpaceShip {
 	public  void helthDown(){
 		this.hp--;
 	}
+	public void changeVx(EnemySpaceShip e, double d){
+		e.Vx=(float)Math.sin(d);
+	}
 	
 
 }
