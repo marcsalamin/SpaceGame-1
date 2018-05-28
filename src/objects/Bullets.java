@@ -14,7 +14,7 @@ public class Bullets {
 	double hitBox = GameCode.height / 40;
 	Circle c;
 	 
-	 Bullets(Point p, float Vx, float Vy , State s){ 
+	public Bullets(Point p, float Vx, float Vy , State s){ 
 		 this.p = p;
 		 this.Vx = Vx;
 		 this.Vy = Vy;
