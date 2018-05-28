@@ -1,6 +1,8 @@
 package objects;
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javafx.scene.shape.Circle;
 
@@ -38,4 +40,10 @@ public class OurSpaceShip {
 		return hp;
 	}
 
+	public void onKeyDown(int keycode) {
+		
+	}
+	
+	public void onKeyUp(int keycode) {
+	}
 }
