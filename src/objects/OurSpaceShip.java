@@ -44,18 +44,19 @@ public class OurSpaceShip {
 	}
 	
 	public void onKeyDown(int keycode) {
+		float speed = 5;
 		switch(keycode){
 		case 19:
-			Vy ++;
+			Vy = speed;
 			break;
 		case 20:
-			Vy --;
+			Vy =- speed;
 			break;
 		case 21:
-			Vx --;
+			Vx =- speed;
 			break;
 		case 22:
-			Vx ++;
+			Vx = speed;
 			break;
 		
 		}
@@ -63,8 +64,8 @@ public class OurSpaceShip {
 	
 	public void onKeyUp(int keycode) {
 		if(keycode == 19 || keycode == 20)
-			Vy=0;
+			Vy=0f;
 		if(keycode == 21 || keycode == 22)
-			Vx=0;
+			Vx=0f;
 	}
 }
