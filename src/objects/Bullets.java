@@ -23,8 +23,8 @@ public class Bullets {
 	Circle c;
 	 
 	//Constructor
-	public Bullets(Point p, float Vx, float Vy , State s){ 
-		 this.p = p;
+	public Bullets(Point p, float Vx, float Vy , State s){
+		 this.p = (Point)p.clone();
 		 this.Vx = Vx;
 		 this.Vy = Vy;
 		 this.c= new Circle(p.getX(),p.getY(),hitBox);
