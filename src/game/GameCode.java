@@ -29,7 +29,7 @@ public class GameCode extends PortableApplication {
 	//Class attributes
 	static Vector <Bullets> b = new Vector<Bullets>();
 	static Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
-	static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3);
+	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3);
 	
 	//Constructor
 	public GameCode(){
@@ -72,6 +72,7 @@ public class GameCode extends PortableApplication {
 		
 		//Draw a blue circle for OurSpaceShip
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
+		os.ticks();
 		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();
