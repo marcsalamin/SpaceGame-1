@@ -12,6 +12,7 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 import objects.Bullets;
 import objects.EnemySpaceShip;
 import objects.OurSpaceShip;
+import objects.Bullets.State;
 import sun.java2d.pipe.OutlineTextRenderer;
 
 /**
@@ -44,6 +45,10 @@ public class GameCode extends PortableApplication {
 				(float) 1, width / 80, 1);
 		ves.add(es);
 	}
+	public void generateBullet(Point p, float Vx, float Vy , State s){
+		Bullets b = new Bullets(p, Vx, Vy, s);
+		this.b.add(b);
+	}
 	
 	@Override
 	public void onInit() {
@@ -63,16 +68,22 @@ public class GameCode extends PortableApplication {
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.WHITE);
+		generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
 		
 		//Draw a red circle for all the EnemyShip
 		for(int i = 0; i< ves.size(); i++){
 			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
 			ves.get(i).tick();
+			g.drawCircle((float)b.get(i).getPosition().getX(),(float) b.get(i).getPosition().getY(), b.get(i).getHitBox(), Color.BLACK);
+			b.get(i).tick();
 		}
 		
 		//Draw a blue circle for OurSpaceShip
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
 		os.ticks();
+		
+		
+		
 		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();

@@ -19,7 +19,7 @@ public class Bullets {
 	Point p;
 	float Vx;
 	float Vy;
-	float hitBox = (float)GameCode.height / 40;
+	float hitBox = (float)GameCode.height / 100;
 	Circle c;
 	 
 	//Constructor

@@ -39,6 +39,7 @@ public class OurSpaceShip {
 	
 	public void ticks(){
 		p.setLocation(p.getX() + Vx, p.getY() + Vy);
+		
 		if(GameCode.os.getPosition().getY() < GameCode.os.getHitBox())
 			Vy =0;
 		if(GameCode.os.getPosition().getY() > GameCode.height-GameCode.os.getHitBox())
