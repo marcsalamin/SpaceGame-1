@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Point;
 
+import ch.hevs.gdx2d.lib.utils.Logger;
 import objects.Bullets;
 
 
@@ -12,11 +13,14 @@ import objects.Bullets;
  *
  */
 public class Collision {
+<<<<<<< HEAD
 	
 	
 	/**
 	 * Method manager the collisions
 	 */
+=======
+>>>>>>> 29e551b4a5e9e23bffacdbc3f966efc91e1c0130
 	public static void tick(){
 		
 		//Data recovery from OurSpaceShip
@@ -24,8 +28,12 @@ public class Collision {
 		float h3 = GameCode.os.getHitBox();
 		Point borderScreen1 = new Point(0,0);
 		Point borderScreen2 = new Point((int)GameCode.width,(int)GameCode.height);
+<<<<<<< HEAD
 		
 		//Browse all our vector to see if there are any collisions
+=======
+		Logger.dbg("Ticking");
+>>>>>>> 29e551b4a5e9e23bffacdbc3f966efc91e1c0130
 		for (int i =0; i < GameCode.b.size();i++){
 			for(int j = 0; j< GameCode.ves.size();j++){
 				
@@ -55,9 +63,18 @@ public class Collision {
 						//lost
 					}
 				}
+<<<<<<< HEAD
 				
 				//Collision between EnemyShip and OurSpaceShip
+=======
+<<<<<<< HEAD
+				
+				Logger.dbg(p2.distance(p3) + ", " + h2+h3);
+				if(p2.distance(p3)<h2+h3){
+=======
+>>>>>>> 29e551b4a5e9e23bffacdbc3f966efc91e1c0130
 				if(p2.distance(p3)<(h2+h3)){
+>>>>>>> abd9b38535daba0d6b4a79564a8f4ee2d8dd580c
 					GameCode.ves.removeElementAt(j);
 					GameCode.os.helthDown();
 					if(GameCode.os.getHealth()<1){
