@@ -69,9 +69,8 @@ public class GameCode extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.WHITE);
 		generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
-		for(int i =0; i <3;i++){
 		generateEnemy();
-	}
+	
 		
 		//Draw a red circle for all the EnemyShip
 		for(int i = 0; i< ves.size(); i++){
