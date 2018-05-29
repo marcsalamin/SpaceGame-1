@@ -37,9 +37,13 @@ public class Collision {
 						//lost
 					}
 				}
+<<<<<<< HEAD
 				
 				Logger.dbg(p2.distance(p3) + ", " + h2+h3);
 				if(p2.distance(p3)<h2+h3){
+=======
+				if(p2.distance(p3)<(h2+h3)){
+>>>>>>> abd9b38535daba0d6b4a79564a8f4ee2d8dd580c
 					GameCode.ves.removeElementAt(j);
 					GameCode.os.helthDown();
 					if(GameCode.os.getHealth()<1){

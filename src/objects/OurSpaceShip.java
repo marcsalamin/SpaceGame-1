@@ -1,10 +1,6 @@
 package objects;
 
 import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import org.lwjgl.input.Keyboard;
 
 import com.badlogic.gdx.Input;
 
@@ -25,7 +21,6 @@ public class OurSpaceShip {
 		this.hitBox = hitBox;
 		this.c= new Circle(p.getX(),p.getY(),hitBox);
 		this.hp = 3;
-		
 	}	
 	
 	public static Point getPosition(){
