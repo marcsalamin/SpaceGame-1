@@ -38,7 +38,7 @@ public class Collision {
 						//lost
 					}
 				}
-				if(p2.distance(p3)<h2+h3){
+				if(p2.distance(p3)<(h2+h3)){
 					GameCode.ves.removeElementAt(j);
 					GameCode.os.helthDown();
 					if(GameCode.os.getHealth()<1){
