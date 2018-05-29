@@ -2,17 +2,16 @@ package game;
 
 import java.awt.Point;
 
+import ch.hevs.gdx2d.lib.utils.Logger;
 import objects.Bullets;
 
 public class Collision {
-	
-	
 	public static void tick(){
 		Point p3 = GameCode.os.getPosition();
 		float h3 = GameCode.os.getHitBox();
 		Point borderScreen1 = new Point(0,0);
 		Point borderScreen2 = new Point((int)GameCode.width,(int)GameCode.height);
-		
+		Logger.dbg("Ticking");
 		for (int i =0; i < GameCode.b.size();i++){
 			for(int j = 0; j< GameCode.ves.size();j++){
 				
@@ -38,6 +37,8 @@ public class Collision {
 						//lost
 					}
 				}
+				
+				Logger.dbg(p2.distance(p3) + ", " + h2+h3);
 				if(p2.distance(p3)<h2+h3){
 					GameCode.ves.removeElementAt(j);
 					GameCode.os.helthDown();
