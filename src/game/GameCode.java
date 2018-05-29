@@ -41,8 +41,8 @@ public class GameCode extends PortableApplication {
 	
 	//Method to generate EnemyShip
 	public void generateEnemy(){
-		EnemySpaceShip es = new EnemySpaceShip(new Point(r.nextInt((int) width), (int) (3 * height / 4)), (float) 0,
-				(float) 1, width / 80, 1);
+		EnemySpaceShip es = new EnemySpaceShip(new Point(r.nextInt((int) width), (int) (9 * height / 10)), (float) 0,
+				5f, width / 80, 1);
 		ves.add(es);
 	}
 	public void generateBullet(Point p, float Vx, float Vy , State s){
@@ -52,7 +52,7 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onInit() {
-		generateEnemy();
+
 	}
 
 	@Override
@@ -69,13 +69,18 @@ public class GameCode extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.WHITE);
 		generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
+		for(int i =0; i <3;i++){
+		generateEnemy();
+	}
 		
 		//Draw a red circle for all the EnemyShip
 		for(int i = 0; i< ves.size(); i++){
 			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
 			ves.get(i).tick();
-			g.drawCircle((float)b.get(i).getPosition().getX(),(float) b.get(i).getPosition().getY(), b.get(i).getHitBox(), Color.BLACK);
-			b.get(i).tick();
+		}
+		for(int j = 0; j< b.size();j++){
+			g.drawCircle((float)b.get(j).getPosition().getX(),(float) b.get(j).getPosition().getY(), b.get(j).getHitBox(), Color.BLACK);
+			b.get(j).tick();
 		}
 		
 		//Draw a blue circle for OurSpaceShip

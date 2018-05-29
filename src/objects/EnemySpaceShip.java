@@ -37,8 +37,8 @@ public class EnemySpaceShip {
 	}
 	
 	public void tick(){
-//		this.Vx=(float)(Math.sin(d)*10);
-		if(p.getX()+Vx < GameCode.width && p.getY()-Vy > 0)
+		this.Vx=(float)(Math.sin(d)*10);
+		if(p.getX()+Vx < GameCode.width )
 			this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy);
 		d+=0.1;
 	}
