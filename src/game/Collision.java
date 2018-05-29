@@ -7,7 +7,7 @@ import objects.Bullets;
 public class Collision {
 	
 	
-	public void tick(){
+	public static void tick(){
 		Point p3 = GameCode.os.getPosition();
 		float h3 = GameCode.os.getHitBox();
 		Point borderScreen1 = new Point(0,0);

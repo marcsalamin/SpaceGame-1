@@ -47,11 +47,17 @@ public class GameCode extends PortableApplication {
 		super.onKeyDown(keycode);
 		os.onKeyDown(keycode);
 	}
+	
+	public void onKeyUp(int keycode){
+		os.onKeyUp(keycode);
+	}
+	
 
 	
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.WHITE);
+		
 		
 		for(int i = 0; i< ves.size(); i++){
 			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
@@ -59,6 +65,7 @@ public class GameCode extends PortableApplication {
 		}
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
 		os.ticks();
+		Collision.tick();
 		
 	}
 	

@@ -6,6 +6,8 @@ import java.awt.event.KeyListener;
 
 import org.lwjgl.input.Keyboard;
 
+import com.badlogic.gdx.Input;
+
 import javafx.scene.shape.Circle;
 
 public class OurSpaceShip {
@@ -46,16 +48,16 @@ public class OurSpaceShip {
 	public void onKeyDown(int keycode) {
 		float speed = 5;
 		switch(keycode){
-		case 19:
+		case Input.Keys.UP:
 			Vy = speed;
 			break;
-		case 20:
+		case Input.Keys.DOWN:
 			Vy =- speed;
 			break;
-		case 21:
+		case Input.Keys.LEFT:
 			Vx =- speed;
 			break;
-		case 22:
+		case Input.Keys.RIGHT:
 			Vx = speed;
 			break;
 		
@@ -63,9 +65,9 @@ public class OurSpaceShip {
 	}
 	
 	public void onKeyUp(int keycode) {
-		if(keycode == 19 || keycode == 20)
+		if(keycode == Input.Keys.DOWN || keycode == Input.Keys.UP)
 			Vy=0f;
-		if(keycode == 21 || keycode == 22)
+		if(keycode == Input.Keys.LEFT|| keycode == Input.Keys.RIGHT)
 			Vx=0f;
 	}
 }
