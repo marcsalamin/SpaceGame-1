@@ -39,13 +39,13 @@ public class OurSpaceShip {
 	
 	public void ticks(){
 		p.setLocation(p.getX() + Vx, p.getY() + Vy);
-		if(GameCode.os.getPosition().getY() < 0)
+		if(GameCode.os.getPosition().getY() < GameCode.os.getHitBox())
 			Vy =0;
-		if(GameCode.os.getPosition().getY() > GameCode.height)
+		if(GameCode.os.getPosition().getY() > GameCode.height-GameCode.os.getHitBox())
 			Vy = 0;
-		if(GameCode.os.getPosition().getX() < 0)
+		if(GameCode.os.getPosition().getX() < GameCode.os.getHitBox())
 			Vx =0;
-		if(GameCode.os.getPosition().getX() > GameCode.width)
+		if(GameCode.os.getPosition().getX() > GameCode.width-GameCode.os.getHitBox())
 			Vx = 0;
 		
 		
@@ -55,22 +55,22 @@ public class OurSpaceShip {
 		float speed = 5;
 		switch(keycode){
 		case Input.Keys.UP:
-			if(GameCode.os.getPosition().getY() < GameCode.height)
+			if(GameCode.os.getPosition().getY() < GameCode.height-GameCode.os.getHitBox())
 				Vy = speed;
 			
 			break;
 		case Input.Keys.DOWN:
-			if(GameCode.os.getPosition().getY() > 0)
+			if(GameCode.os.getPosition().getY() > GameCode.os.getHitBox())
 				Vy =- speed;
 			
 			break;
 		case Input.Keys.LEFT:
-			if(GameCode.os.getPosition().getX() > 0)
+			if(GameCode.os.getPosition().getX() > GameCode.os.getHitBox())
 				Vx =- speed;
 			
 			break;
 		case Input.Keys.RIGHT:
-			if(GameCode.os.getPosition().getX() < GameCode.width)
+			if(GameCode.os.getPosition().getX() < GameCode.width-GameCode.os.getHitBox())
 				Vx = speed;
 			
 			break;
