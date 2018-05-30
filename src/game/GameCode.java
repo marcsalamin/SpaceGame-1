@@ -30,7 +30,8 @@ public class GameCode extends PortableApplication {
 	//Class attributes
 	static Vector <Bullets> b = new Vector<Bullets>();
 	static Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
-	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3);
+	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL3);
+	static int timer;
 	
 	//Constructor
 	public GameCode(){
@@ -42,7 +43,7 @@ public class GameCode extends PortableApplication {
 	//Method to generate EnemyShip
 	public void generateEnemy(){
 		EnemySpaceShip es = new EnemySpaceShip(new Point(r.nextInt((int) width), (int) (9 * height / 10)), (float) 0,
-				5f, width / 80, 1);
+				5f, width / 80, 1, EnemySpaceShip.Category.ENEMY1);
 		ves.add(es);
 	}
 	public void generateBullet(Point p, float Vx, float Vy , State s){
@@ -52,24 +53,55 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onInit() {
-
+		generateEnemy();
 	}
 
 	@Override
 	public void onKeyDown(int keycode) {
 		super.onKeyDown(keycode);
 		os.onKeyDown(keycode);
+		
 	}
 
 	public void onKeyUp(int keycode) {
 		os.onKeyUp(keycode);
 	}
 	
+	public void lost(){
+		
+	}
+	
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
+		timer++;
 		g.clear(Color.WHITE);
-		generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
-		generateEnemy();
+		
+		if(timer%20 == 0){
+				if(os.getLevel() == OurSpaceShip.Level.LEVEL1)
+					generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
+				if(os.getLevel() == OurSpaceShip.Level.LEVEL2){
+					generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
+					generateBullet(os.getPosition(),10,20,Bullets.State.FRIEND);
+					generateBullet(os.getPosition(),-10,20,Bullets.State.FRIEND);
+				}
+		}
+		
+		if(os.getLevel() == OurSpaceShip.Level.LEVEL3){
+			if(timer%10==0){
+				if(os.getLevel() == OurSpaceShip.Level.LEVEL3){
+					generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
+					generateBullet(os.getPosition(),10,20,Bullets.State.FRIEND);
+					generateBullet(os.getPosition(),-10,20,Bullets.State.FRIEND);
+					
+				}
+			}
+		}
+		
+		if(timer%30 == 0){
+			for(int i = 0; i< ves.size(); i++){
+				generateBullet(ves.get(i).getPosition(),0,-20,Bullets.State.ENEMY);
+			}
+		}
 	
 		
 		//Draw a red circle for all the EnemyShip
@@ -86,12 +118,8 @@ public class GameCode extends PortableApplication {
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
 		os.ticks();
 		
-		
-		
-		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();
-
 	}	
 	
 	//Main method to launch the game

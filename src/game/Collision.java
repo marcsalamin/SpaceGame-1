@@ -41,39 +41,40 @@ public class Collision {
 					if (GameCode.ves.get(j).getHealth() < 1) {
 						GameCode.ves.removeElementAt(j);
 					}
+				}
 
-					// Collision between bullets and OurSpaceShip
-					if (p1.distance(p3) < (h1 + h3) && GameCode.b.get(i).getState().equals(Bullets.State.ENEMY)) {
-						GameCode.b.removeElementAt(i);
-						GameCode.os.helthDown();
-						if (GameCode.os.getHealth() < 1) {
-							// lost
-						}
+				// Collision between enemy bullets and OurSpaceShip
+				if (p1.distance(p3) < (h1 + h3) && GameCode.b.get(i).getState().equals(Bullets.State.ENEMY)) {
+					GameCode.b.removeElementAt(i);
+					GameCode.os.helthDown();
+					if (GameCode.os.getHealth() < 1) {
+//						GameCode.lost();
 					}
-					if (p2.distance(p3) < (h2 + h3)) {
+				}
+				if (p2.distance(p3) < (h2 + h3)) {
 
-						GameCode.ves.removeElementAt(j);
-						GameCode.os.helthDown();
-						if (GameCode.os.getHealth() < 1) {
-							// lost
-						}
-
-					}
-
-					// Collision between EnemyShip and OurSpaceShi
-					if (p2.distance(p3) < (h2 + h3)) {
-						GameCode.ves.removeElementAt(j);
-						GameCode.os.helthDown();
-						if (GameCode.os.getHealth() < 1) {
-							// lost
-						}
+					GameCode.ves.removeElementAt(j);
+					GameCode.os.helthDown();
+					if (GameCode.os.getHealth() < 1) {
+//						GameCode.lost();
 					}
 
+				}
+
+				// Collision between EnemyShip and OurSpaceShi
+				if (p2.distance(p3) < (h2 + h3)) {
+					GameCode.ves.removeElementAt(j);
+					GameCode.os.helthDown();
+					if (GameCode.os.getHealth() < 1) {
+//						GameCode.lost();
+					}
 				}
 
 			}
 
 		}
+
+
 		for (int i = 0; i < GameCode.ves.size(); i++) {
 			Point p2 = GameCode.ves.get(i).getPosition();
 			// Collision between Screen and EnemyShip

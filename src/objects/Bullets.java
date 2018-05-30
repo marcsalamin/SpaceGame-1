@@ -20,14 +20,12 @@ public class Bullets {
 	float Vx;
 	float Vy;
 	float hitBox = (float)GameCode.height / 100;
-	Circle c;
 	 
 	//Constructor
 	public Bullets(Point p, float Vx, float Vy , State s){
 		 this.p = (Point)p.clone();
 		 this.Vx = Vx;
 		 this.Vy = Vy;
-		 this.c= new Circle(p.getX(),p.getY(),hitBox);
 		 this.s = s;
 	 }
 	

@@ -8,20 +8,31 @@ import game.GameCode;
 import javafx.scene.shape.Circle;
 
 public class OurSpaceShip {
+	
+	public enum Level {LEVEL1, LEVEL2, LEVEL3};
+	
 	private static Point p;
 	private static float Vx, Vy;
-	private Circle c;
 	private float hitBox;
-	private static int hp;
+	private static int hp, score;
+	private Level l;
 	
-	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp){
+	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp, Level l){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy = Vy;
 		this.hitBox = hitBox;
-		this.c= new Circle(p.getX(),p.getY(),hitBox);
 		this.hp = 3;
-	}	
+		this.l = l;
+	}
+	
+	public Level getLevel(){
+		return l;
+	}
+	
+	public void setLevel(Level l){
+		this.l = l;
+	}
 	
 	public static Point getPosition(){
 		return p;
