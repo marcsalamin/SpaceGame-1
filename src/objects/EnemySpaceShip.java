@@ -92,6 +92,8 @@ public class EnemySpaceShip {
 			if(sign<0.5)sign=-1;
 			else sign = 1;
 			this.Vx=(float)(Math.random()*10*sign);
+			if(this.p.getX()<0||this.p.getX()>GameCode.width)
+				this.Vx *=-1;
 			break;
 		case ENEMY3:
 			this.Vx =0;
