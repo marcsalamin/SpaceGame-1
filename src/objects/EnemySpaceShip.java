@@ -88,8 +88,13 @@ public class EnemySpaceShip {
 			d+=0.1;	
 			break;
 		case ENEMY2:
+			double sign = Math.random();
+			if(sign<0.5)sign=-1;
+			else sign = 1;
+			this.Vx=(float)(Math.random()*10*sign);
 			break;
 		case ENEMY3:
+			this.Vx =0;
 			break;
 		}
 		
