@@ -29,8 +29,8 @@ public class GameCode extends PortableApplication {
 	
 	//Class attributes
 	static Vector <Bullets> b = new Vector<Bullets>();
-	static Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
-	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL3);
+	public static Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
+	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL2);
 	static int timer;
 	
 	//Constructor
@@ -39,11 +39,12 @@ public class GameCode extends PortableApplication {
 	}
 	
 	Random r = new Random(124345);
+	Random rEnemy = new Random(124345);
 	
 	//Method to generate EnemyShip
-	public void generateEnemy(){
+	public void generateEnemy(EnemySpaceShip.Category e){
 		EnemySpaceShip es = new EnemySpaceShip(new Point(r.nextInt((int) width), (int) (9 * height / 10)), (float) 0,
-				5f, width / 80, 1, EnemySpaceShip.Category.ENEMY1);
+				5f, width / 80, 1, e);
 		ves.add(es);
 	}
 	public void generateBullet(Point p, float Vx, float Vy , State s){
@@ -53,7 +54,7 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onInit() {
-		generateEnemy();
+		generateEnemy(EnemySpaceShip.Category.ENEMY2);
 	}
 
 	@Override
@@ -75,6 +76,20 @@ public class GameCode extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		timer++;
 		g.clear(Color.WHITE);
+		if(timer%10 == 0){
+			switch(rEnemy.nextInt(2)){
+			case 0:
+				generateEnemy(EnemySpaceShip.Category.ENEMY1);
+			break;
+			case 1:
+				generateEnemy(EnemySpaceShip.Category.ENEMY2);
+			break;
+			case 2:
+				generateEnemy(EnemySpaceShip.Category.ENEMY3);
+			break;
+				
+			}
+		}
 		
 		if(timer%20 == 0){
 				if(os.getLevel() == OurSpaceShip.Level.LEVEL1)
