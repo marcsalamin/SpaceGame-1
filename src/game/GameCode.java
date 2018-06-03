@@ -76,7 +76,7 @@ public class GameCode extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		timer++;
 		g.clear(Color.WHITE);
-		if(timer%10 == 0){
+		if(timer%50 == 0){
 			switch(rEnemy.nextInt(2)){
 			case 0:
 				generateEnemy(EnemySpaceShip.Category.ENEMY1);
