@@ -16,6 +16,7 @@ public class OurSpaceShip {
 	private float hitBox;
 	private static int hp, score;
 	private Level l;
+	public boolean shield = false;
 	
 	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp, Level l){
 		this.p = p;
@@ -47,6 +48,27 @@ public class OurSpaceShip {
 	public int getHealth(){
 		return hp;
 	}
+	public void upgrade(Items.Utility u){
+		if(u == Items.Utility.munUpgrade){
+			switch (l){
+			case LEVEL1 :
+				l = Level.LEVEL2;
+				break;
+			case LEVEL2 :
+				l = Level.LEVEL3;
+				break;
+				
+				
+			}
+		}
+		if(u == Items.Utility.life){
+			hp++;
+		}
+		if(u == Items.Utility.shield){
+			shield = true;
+			
+		}
+	}
 	
 	public void ticks(){
 		p.setLocation(p.getX() + Vx, p.getY() + Vy);
@@ -64,7 +86,7 @@ public class OurSpaceShip {
 	}
 	
 	public void onKeyDown(int keycode) {
-		float speed = 5;
+		float speed = 10f;
 		switch(keycode){
 		case Input.Keys.UP:
 			if(GameCode.os.getPosition().getY() < GameCode.height-GameCode.os.getHitBox())
