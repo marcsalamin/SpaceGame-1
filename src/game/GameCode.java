@@ -37,7 +37,7 @@ public class GameCode extends PortableApplication {
 	public GameCode(){
 		super((int)width,(int) height,true);
 	}
-	
+	// ?????????
 	Random r = new Random(124345);
 	Random rEnemy = new Random(124345);
 	
@@ -112,7 +112,7 @@ public class GameCode extends PortableApplication {
 			}
 		}
 		
-		if(timer%30 == 0){
+		if(timer%50 == 0){
 			for(int i = 0; i< ves.size(); i++){
 				generateBullet(ves.get(i).getPosition(),0,-20,Bullets.State.ENEMY);
 			}

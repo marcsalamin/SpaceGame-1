@@ -25,6 +25,8 @@ public class Collision {
 		// Browse all our vector to see if there are any collisions
 		for (int i = 0; i < GameCode.b.size(); i++) {
 			for (int j = 0; j < GameCode.ves.size(); j++) {
+				boolean bulletDead = false;
+				boolean enemySpaceShipDead = false;
 
 				// Data recovery from the bullets
 				Point p1 = GameCode.b.get(i).getPosition();
@@ -36,24 +38,22 @@ public class Collision {
 
 				// Collision between bullets and EnemyShip
 				if (p1.distance(p2) < (h1 + h2) && GameCode.b.get(i).getState().equals(Bullets.State.FRIEND)) {
-					GameCode.b.removeElementAt(i);
 					GameCode.ves.get(j).helthDown();
 					if (GameCode.ves.get(j).getHealth() < 1) {
-						GameCode.ves.removeElementAt(j);
+						enemySpaceShipDead = true;
 					}
 				}
 
 				// Collision between enemy bullets and OurSpaceShip
 				if (p1.distance(p3) < (h1 + h3) && GameCode.b.get(i).getState().equals(Bullets.State.ENEMY)) {
-					GameCode.b.removeElementAt(i);
+					bulletDead = true;
 					GameCode.os.helthDown();
 					if (GameCode.os.getHealth() < 1) {
 //						GameCode.lost();
 					}
 				}
 				if (p2.distance(p3) < (h2 + h3)) {
-
-					GameCode.ves.removeElementAt(j);
+					enemySpaceShipDead = true;
 					GameCode.os.helthDown();
 					if (GameCode.os.getHealth() < 1) {
 //						GameCode.lost();
@@ -63,11 +63,19 @@ public class Collision {
 
 				// Collision between EnemyShip and OurSpaceShi
 				if (p2.distance(p3) < (h2 + h3)) {
-					GameCode.ves.removeElementAt(j);
+					enemySpaceShipDead = true;
 					GameCode.os.helthDown();
 					if (GameCode.os.getHealth() < 1) {
 //						GameCode.lost();
 					}
+				}
+				// remove the enemy space ship if a collision was detected
+				if(enemySpaceShipDead){
+					GameCode.ves.removeElementAt(j);	
+				}
+				// remove the bullet if a collision was detected
+				if(bulletDead){
+					GameCode.b.removeElementAt(i);
 				}
 
 			}
