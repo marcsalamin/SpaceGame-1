@@ -83,6 +83,8 @@ public class EnemySpaceShip {
 		switch(this.c){
 		case ENEMY1:
 			this.Vx=(float)(Math.sin(d)*10);
+			if(this.p.getX()+ this.Vx < 0||this.p.getX()+this.Vx > GameCode.width)
+				c = this.c.ENEMY2;
 			if(p.getX()+Vx < GameCode.width - hitBox&&p.getX()-Vx > 0)
 				this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy);
 			d+=0.1/GameCode.ves.size();	
@@ -92,10 +94,10 @@ public class EnemySpaceShip {
 		case ENEMY2:
 			
 			if(this.Vx==0){
-			double sign = Math.random();
-			if(sign<0.5)sign=-1;
-			else sign = 1;
-			this.Vx=(float)(Math.random()*10*sign);
+				double sign = Math.random();
+				if(sign<0.5)sign=-1;
+				else sign = 1;
+				this.Vx=(float)(Math.random()*10*sign);
 			}
 			if(this.p.getX()+ this.Vx < 0||this.p.getX()+this.Vx > GameCode.width)
 				this.Vx *=-1;

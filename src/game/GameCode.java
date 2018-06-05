@@ -59,8 +59,8 @@ public class GameCode extends PortableApplication {
 	//Method to generate Item depending the level of our spaceShip
 	public void generateItem(){
 		Point p = new Point(r.nextInt((int) width), (int) (9 * height / 10));
-		float Vx = (float)(Math.random()*width);
-		float Vy = -5f;
+		float Vx = 0;
+		float Vy = 5f;
 		float hitBox = height/80;
 		Items mun;
 		
@@ -168,7 +168,6 @@ public class GameCode extends PortableApplication {
 		}
 		// Draw a gold circle for Items
 		for(int k = 0; k< item.size();k++){
-			System.out.println(item.get(k).getPosition());
 			g.drawAntiAliasedCircle((float)item.get(k).getPosition().getX(),(float) item.get(k).getPosition().getY(), item.get(k).getHitbox(), Color.GOLD);
 			item.get(k).tick();
 		}
