@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -10,11 +11,10 @@ import com.badlogic.gdx.graphics.Color;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import objects.Bullets;
+import objects.Bullets.State;
 import objects.EnemySpaceShip;
 import objects.Items;
 import objects.OurSpaceShip;
-import objects.Bullets.State;
-import sun.java2d.pipe.OutlineTextRenderer;
 
 /**
  * @author Philippine Favre et Marc Salamin
@@ -29,9 +29,9 @@ public class GameCode extends PortableApplication {
 	public static float width  = (float) dimension.getWidth();
 	
 	//Class attributes
-	static Vector <Bullets> b = new Vector<Bullets>();
-	public static Vector <EnemySpaceShip> ves = new Vector <EnemySpaceShip>();
-	public static Vector<Items> i = new Vector<Items>();
+	static ArrayList<Bullets> b = new ArrayList<Bullets>();
+	public static ArrayList <EnemySpaceShip> ves = new ArrayList <EnemySpaceShip>();
+	public static ArrayList<Items> i = new ArrayList<Items>();
 	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL1);
 	static int timer;
 	
@@ -57,13 +57,13 @@ public class GameCode extends PortableApplication {
 	public void generateItem(){
 
 		Point p = new Point(r.nextInt((int) width), (int) (9 * height / 10));
-		float Vx = (float)Math.random()*width;
+		float Vx = (float)(Math.random()*width);
 		float Vy = -5f;
 		Items mun;
 		switch (rItem.nextInt(2)){
 		case 0:
 			Items life = new Items(p,Vx,Vy,GameCode.height/80,Items.Utility.life);
-			this.i.addElement(life);
+			this.i.add(life);
 			break;
 		case 1:
 			if(os.getLevel()!= OurSpaceShip.Level.LEVEL3){
@@ -75,11 +75,11 @@ public class GameCode extends PortableApplication {
 				mun = new Items(p,Vx,Vy,GameCode.height/80,u);
 				}
 			
-			this.i.addElement(mun);
+			this.i.add(mun);
 			break;
 		case 2:
 			Items shield = new Items(p,Vx,Vy,GameCode.height/80,Items.Utility.shield);
-			this.i.addElement(shield);
+			this.i.add(shield);
 			break;
 	}
 		
@@ -114,20 +114,20 @@ public class GameCode extends PortableApplication {
 		if(timer%100 == 0){
 			generateItem();
 		}
-//		if(timer%50 == 0){
-//			switch(rEnemy.nextInt(2)){
-//			case 0:
-//				generateEnemy(EnemySpaceShip.Category.ENEMY1);
-//			break;
-//			case 1:
-//				generateEnemy(EnemySpaceShip.Category.ENEMY2);
-//			break;
-//			case 2:
-//				generateEnemy(EnemySpaceShip.Category.ENEMY3);
-//			break;
-//				
-//			}
-//		}
+		if(timer%50 == 0){
+			switch(rEnemy.nextInt(2)){
+			case 0:
+				generateEnemy(EnemySpaceShip.Category.ENEMY1);
+			break;
+			case 1:
+				generateEnemy(EnemySpaceShip.Category.ENEMY2);
+			break;
+			case 2:
+				generateEnemy(EnemySpaceShip.Category.ENEMY3);
+			break;
+				
+			}
+		}
 		
 		if(timer%20 == 0){
 				if(os.getLevel() == OurSpaceShip.Level.LEVEL1)
@@ -168,8 +168,8 @@ public class GameCode extends PortableApplication {
 		}
 		// Draw a gold circle for Items
 		for(int k = 0; k< i.size();k++){
-		
-			g.drawCircle((float)i.get(k).getPosition().getX(),(float) i.get(k).getPosition().getY(), i.get(k).getHitbox(), Color.GOLD);
+			System.out.println(i.get(k).getPosition());
+			g.drawAntiAliasedCircle((float)i.get(k).getPosition().getX(),(float) i.get(k).getPosition().getY(), i.get(k).getHitbox(), Color.GOLD);
 			i.get(k).tick();
 		}
 		
