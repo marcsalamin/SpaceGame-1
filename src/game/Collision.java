@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import objects.Bullets;
+import objects.EnemySpaceShip;
 
 /**
  * @author Philippine Favre et Marc Salamin Class allowing the management of
@@ -18,24 +19,53 @@ public class Collision {
 	public static void tick() {
 
 		// Data recovery from OurSpaceShip
-		Point p3 = GameCode.os.getPosition();
-		float h3 = GameCode.os.getHitBox();
+		Point pOfOurSpaceShip = GameCode.os.getPosition();
+		float hitBoxOfOurSpaceShip = GameCode.os.getHitBox();
 		Point borderScreen1 = new Point(0, 0);
 		Point borderScreen2 = new Point((int) GameCode.width, (int) GameCode.height);
 
 		// Browse all our vector to see if there are any collisions
-		Iterator<Bullets> b = GameCode.b.iterator();
-		ArrayList<Bullets> toDelete = new ArrayList<Bullets>();
-		
-		while(b.hasNext()) {
+		Iterator<Bullets> b;
+		ArrayList<Bullets> bulletsToDelete = new ArrayList<Bullets>();
+		Iterator<EnemySpaceShip> e;
+		ArrayList<EnemySpaceShip> enemyToDelete = new ArrayList<EnemySpaceShip>();
+
+		e = GameCode.ves.iterator();
+		while (e.hasNext()) {
+			EnemySpaceShip enem = e.next();
+
+			// Data recovery from the EnemyShip
+			Point pOfEnemy = enem.getPosition();
+			float hitBoxOfEnemy = enem.getHitBox();
+			boolean enemySpaceShipDead = false;
+
+			// Collision between EnemyShip and OurSpaceShi
+			if (pOfEnemy.distance(pOfOurSpaceShip) < (hitBoxOfEnemy + hitBoxOfOurSpaceShip)) {
+				enemySpaceShipDead = true;
+				if (GameCode.os.shield) {
+					// do something with the shield ex : start a timer ,
+					// delete it ...
+				} else
+					GameCode.os.helthDown();
+				if (GameCode.os.getHealth() < 1) {
+					// GameCode.lost();
+				}
+			}
+			if (enemySpaceShipDead) {
+				enemyToDelete.add(enem);
+			}
+		}
+
+		b = GameCode.b.iterator();
+		while (b.hasNext()) {
 			Bullets bul = b.next();
 			// Data recovery from the bullets
-			Point p1 = bul.getPosition();
-			float h1 = bul.getHitBox();
+			Point pOfBullet = bul.getPosition();
+			float hitBoxOfBullet = bul.getHitBox();
 			boolean bulletDead = false;
 
 			// Collision between enemy bullets and OurSpaceShip
-			if (p1.distance(p3) < (h1 + h3) && bul.getState().equals(Bullets.State.ENEMY)) {
+			if (pOfBullet.distance(pOfOurSpaceShip) < (hitBoxOfBullet + hitBoxOfOurSpaceShip) && bul.getState().equals(Bullets.State.ENEMY)) {
 				bulletDead = true;
 				if (GameCode.os.shield) {
 					// do something with the shield ex : start a timer , delete
@@ -46,63 +76,37 @@ public class Collision {
 					// GameCode.lost();
 				}
 			}
-			
+
 			// Have we shot a enemy vessel
-			for (int j = 0; j < GameCode.ves.size(); j++) {
+			e = GameCode.ves.iterator();
+			while (e.hasNext()) {
+				EnemySpaceShip enem = e.next();
 
 				// Data recovery from the EnemyShip
-				Point p2 = GameCode.ves.get(j).getPosition();
-				float h2 = GameCode.ves.get(j).getHitBox();
+				Point pOfEnemy = enem.getPosition();
+				float hitBoxOfEnemy = enem.getHitBox();
 				boolean enemySpaceShipDead = false;
 
 				// Collision between bullets and EnemyShip
-				if (p1.distance(p2) < (h1 + h2) && bul.getState().equals(Bullets.State.FRIEND)) {
-					GameCode.ves.get(j).helthDown();
-					if (GameCode.ves.get(j).getHealth() < 1) {
-						enemySpaceShipDead = true;
-					}
-				}
-
-				if (p2.distance(p3) < (h2 + h3)) {
+				if (pOfBullet.distance(pOfEnemy) < (hitBoxOfBullet + hitBoxOfEnemy) && bul.getState().equals(Bullets.State.FRIEND)) {
 					enemySpaceShipDead = true;
-					if (GameCode.os.shield) {
-						// do something with the shield ex : start a timer ,
-						// delete it ...
-					} else
-						GameCode.os.helthDown();
-					if (GameCode.os.getHealth() < 1) {
-						// GameCode.lost();
-					}
 
 				}
 
-				// Collision between EnemyShip and OurSpaceShi
-				if (p2.distance(p3) < (h2 + h3)) {
-					enemySpaceShipDead = true;
-					if (GameCode.os.shield) {
-						// do something with the shield ex : start a timer ,
-						// delete it ...
-					} else
-						GameCode.os.helthDown();
-					if (GameCode.os.getHealth() < 1) {
-						// GameCode.lost();
-					}
-				}
-				
 				// remove the enemy space ship if a collision was detected
 				if (enemySpaceShipDead) {
-					GameCode.ves.remove(j);
+					enemyToDelete.add(enem);
 				}
-				
+
 				// remove the bullet if a collision was detected
 				if (bulletDead) {
-					toDelete.add(bul);
+					bulletsToDelete.add(bul);
 					continue;
 				}
-				
+
 				for (int k = 0; k < GameCode.i.size(); k++) {
 					// collision between bullets and Items
-					if (p1.distance(GameCode.i.get(k).getPosition()) < GameCode.i.get(k).getHitbox() + h1
+					if (pOfBullet.distance(GameCode.i.get(k).getPosition()) < GameCode.i.get(k).getHitbox() + hitBoxOfBullet
 							&& bul.getState().equals(Bullets.State.FRIEND)) {
 						GameCode.i.get(k).healthDown();
 						if (GameCode.i.get(k).getHealth() < 1) {
@@ -115,23 +119,27 @@ public class Collision {
 			}
 
 		}
-		for(Bullets  bul: toDelete){
+		for (EnemySpaceShip enem : enemyToDelete) {
+			GameCode.ves.remove(enem);
+		}
+
+		for (Bullets bul : bulletsToDelete) {
 			GameCode.b.remove(bul);
 		}
 
 		for (int i = 0; i < GameCode.ves.size(); i++) {
-			Point p2 = GameCode.ves.get(i).getPosition();
+			Point pOfEnemy = GameCode.ves.get(i).getPosition();
 			// Collision between Screen and EnemyShip
-			if (p2.getY() <= borderScreen1.getY() || p2.getY() >= borderScreen2.getY()) {
+			if (pOfEnemy.getY() <= borderScreen1.getY() || pOfEnemy.getY() >= borderScreen2.getY()) {
 
 				GameCode.ves.remove(i);
 			}
 		}
 		for (int i = 0; i < GameCode.b.size(); i++) {
-			Point p1 = GameCode.b.get(i).getPosition();
+			Point pOfBullet = GameCode.b.get(i).getPosition();
 
 			// Collision between Screen and bullets
-			if (p1.getY() <= borderScreen1.getY() || p1.getY() >= borderScreen2.getY()) {
+			if (pOfBullet.getY() <= borderScreen1.getY() || pOfBullet.getY() >= borderScreen2.getY()) {
 
 				GameCode.b.remove(i);
 			}
