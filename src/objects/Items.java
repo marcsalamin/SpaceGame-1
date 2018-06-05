@@ -2,6 +2,8 @@ package objects;
 
 import java.awt.Point;
 
+import game.GameCode;
+
 public class Items {
 	public enum  Utility {munUpgrade, shield, life}
 	Point p;
@@ -17,9 +19,7 @@ public class Items {
 		this.Vy = Vy;
 		this.u = u;
 		this.hp = 5;
-		this.hitBox = hitBox;
-		System.out.println("drawn");
-		
+		this.hitBox = hitbox;		
 	}
 	public void healthDown(){
 		hp--;
@@ -37,7 +37,16 @@ public class Items {
 		return u;
 	}
 	public void tick(){
-		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
+		if(this.Vx==0){
+			double sign = Math.random();
+			if(sign<0.5)sign=-1;
+			else sign = 1;
+			this.Vx=(float)(Math.random()*10*sign);
+		}
+		if(this.p.getX()+ this.Vx < 0||this.p.getX()+this.Vx > GameCode.width)
+			this.Vx *=-1;
+		if(p.getX()+Vx < GameCode.width &&p.getX()+ Vx > 0)
+			this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy);
 	}
 
 }
