@@ -18,7 +18,7 @@ public class Items {
 		this.Vx = Vx;
 		this.Vy = Vy;
 		this.u = u;
-		this.hp = 5;
+		this.hp = 1;
 		this.hitBox = hitbox;		
 	}
 	public void healthDown(){

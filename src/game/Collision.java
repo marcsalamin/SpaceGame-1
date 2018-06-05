@@ -43,11 +43,10 @@ public class Collision {
 			// Collision between EnemyShip and OurSpaceShi
 			if (pOfEnemy.distance(pOfOurSpaceShip) < (hitBoxOfEnemy + hitBoxOfOurSpaceShip)) {
 				enemySpaceShipDead = true;
-				if (GameCode.os.shield) {
-					// do something with the shield ex : start a timer ,
-					// delete it ...
-				} else
+				if (!GameCode.os.shield) {
 					GameCode.os.helthDown();
+				} 
+					
 				if (GameCode.os.getHealth() < 1) {
 					// GameCode.lost();
 				}
