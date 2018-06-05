@@ -34,6 +34,7 @@ public class GameCode extends PortableApplication {
 	public static ArrayList<Items> item = new ArrayList<Items>();
 	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL1);
 	static int timer;
+	static boolean gameOver = false;
 	
 	//Constructor
 	public GameCode(){
@@ -104,18 +105,24 @@ public class GameCode extends PortableApplication {
 		os.onKeyUp(keycode);
 	}
 	
-	public void lost(){
+	public static void lost(){
+		gameOver = true;
 		
 	}
 	
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
+		if(gameOver){
+			g.clear();
+			g.drawStringCentered(height/2, "GAME OVER");
+		}
+		else{
 		timer++;
 		g.clear(Color.WHITE);
 		if(timer% 10 ==0){
 			os.timerShield--;
 		}
-		if(timer%100 == 0){
+		if(timer%1000 == 0){
 			generateItem();
 		}
 		if(timer%50 == 0){
@@ -186,6 +193,7 @@ public class GameCode extends PortableApplication {
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();
 	}	
+	}
 	
 	//Main method to launch the game
 	public static void main(String[] args) {

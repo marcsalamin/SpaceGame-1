@@ -48,7 +48,7 @@ public class Collision {
 				} 
 					
 				if (GameCode.os.getHealth() < 1) {
-					// GameCode.lost();
+					GameCode.lost();
 				}
 			}
 			if (enemySpaceShipDead) {
@@ -74,7 +74,7 @@ public class Collision {
 				} else
 					GameCode.os.helthDown();
 				if (GameCode.os.getHealth() < 1) {
-					// GameCode.lost();
+					 GameCode.lost();
 				}
 			}
 
