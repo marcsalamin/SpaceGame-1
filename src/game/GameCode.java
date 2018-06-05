@@ -64,7 +64,7 @@ public class GameCode extends PortableApplication {
 		float hitBox = height/80;
 		Items mun;
 		
-		switch (r.nextInt(2)){
+		switch (r.nextInt(3)){
 		case 0:
 			Items life = new Items(p,Vx,Vy,hitBox,Items.Utility.life);
 			this.item.add(life);
@@ -112,6 +112,9 @@ public class GameCode extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		timer++;
 		g.clear(Color.WHITE);
+		if(timer% 10 ==0){
+			os.timerShield--;
+		}
 		if(timer%100 == 0){
 			generateItem();
 		}
@@ -174,7 +177,11 @@ public class GameCode extends PortableApplication {
 		
 		//Draw a blue circle for OurSpaceShip
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
-		os.ticks();
+		
+		if(os.shield){
+			g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox()+10, Color.GREEN);
+			System.out.println("shield");
+		}os.ticks();
 		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();

@@ -17,6 +17,7 @@ public class OurSpaceShip {
 	private static int hp, score;
 	private Level l;
 	public boolean shield = false;
+	public static int timerShield;
 	
 	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp, Level l){
 		this.p = p;
@@ -66,11 +67,15 @@ public class OurSpaceShip {
 		}
 		if(u == Items.Utility.shield){
 			shield = true;
+			timerShield = 100;
 			
 		}
 	}
 	
 	public void ticks(){
+		if(timerShield < 0){
+			shield = false;
+		}
 		p.setLocation(p.getX() + Vx, p.getY() + Vy);
 		
 		if(GameCode.os.getPosition().getY() < GameCode.os.getHitBox())
