@@ -168,7 +168,7 @@ public class GameCode extends PortableApplication {
 		}
 		// Draw a gold circle for Items
 		for(int k = 0; k< i.size();k++){
-			System.out.println("drawn");
+		
 			g.drawCircle((float)i.get(k).getPosition().getX(),(float) i.get(k).getPosition().getY(), i.get(k).getHitbox(), Color.GOLD);
 			i.get(k).tick();
 		}

@@ -18,6 +18,7 @@ public class Items {
 		this.u = u;
 		this.hp = 5;
 		this.hitBox = hitBox;
+		System.out.println("drawn");
 		
 	}
 	public void healthDown(){
