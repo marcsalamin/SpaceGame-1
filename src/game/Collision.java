@@ -25,7 +25,7 @@ public class Collision {
 		Point borderScreen2 = new Point((int) GameCode.width, (int) GameCode.height);
 
 		// Browse all our vector to see if there are any collisions
-<<<<<<< HEAD
+
 		Iterator<Bullets> b;
 		ArrayList<Bullets> bulletsToDelete = new ArrayList<Bullets>();
 		Iterator<EnemySpaceShip> e;
@@ -57,14 +57,9 @@ public class Collision {
 			}
 		}
 
-		b = GameCode.b.iterator();
-		while (b.hasNext()) {
-=======
-		Iterator<Bullets> b = GameCode.bullets.iterator();
-		ArrayList<Bullets> toDelete = new ArrayList<Bullets>();
-		
+		b = GameCode.bullets.iterator();
 		while(b.hasNext()) {
->>>>>>> 42bcdc23f960b8d68a81ec2dd8835485bdf01661
+
 			Bullets bul = b.next();
 			// Data recovery from the bullets
 			Point pOfBullet = bul.getPosition();
@@ -110,18 +105,14 @@ public class Collision {
 					bulletsToDelete.add(bul);
 					continue;
 				}
-<<<<<<< HEAD
 
-				for (int k = 0; k < GameCode.i.size(); k++) {
-					// collision between bullets and Items
-					if (pOfBullet.distance(GameCode.i.get(k).getPosition()) < GameCode.i.get(k).getHitbox() + hitBoxOfBullet
-=======
-				
+
 				for (int k = 0; k < GameCode.item.size(); k++) {
 					// collision between bullets and Items
-					if (p1.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitbox() + h1
->>>>>>> 42bcdc23f960b8d68a81ec2dd8835485bdf01661
-							&& bul.getState().equals(Bullets.State.FRIEND)) {
+					if (pOfBullet.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitbox() + hitBoxOfBullet){
+
+				
+				
 						GameCode.item.get(k).healthDown();
 						if (GameCode.item.get(k).getHealth() < 1) {
 							GameCode.os.upgrade(GameCode.item.get(k).getUtility());
@@ -133,17 +124,15 @@ public class Collision {
 			}
 
 		}
-<<<<<<< HEAD
+
 		for (EnemySpaceShip enem : enemyToDelete) {
 			GameCode.ves.remove(enem);
 		}
 
-		for (Bullets bul : bulletsToDelete) {
-			GameCode.b.remove(bul);
-=======
-		for(Bullets  bul: toDelete){
+		
+		for(Bullets  bul: bulletsToDelete){
 			GameCode.bullets.remove(bul);
->>>>>>> 42bcdc23f960b8d68a81ec2dd8835485bdf01661
+
 		}
 
 		for (int i = 0; i < GameCode.ves.size(); i++) {
@@ -154,13 +143,11 @@ public class Collision {
 				GameCode.ves.remove(i);
 			}
 		}
-<<<<<<< HEAD
-		for (int i = 0; i < GameCode.b.size(); i++) {
-			Point pOfBullet = GameCode.b.get(i).getPosition();
-=======
+
 		for (int i = 0; i < GameCode.bullets.size(); i++) {
-			Point p1 = GameCode.bullets.get(i).getPosition();
->>>>>>> 42bcdc23f960b8d68a81ec2dd8835485bdf01661
+			Point pOfBullet = GameCode.bullets.get(i).getPosition();
+
+		
 
 			// Collision between Screen and bullets
 			if (pOfBullet.getY() <= borderScreen1.getY() || pOfBullet.getY() >= borderScreen2.getY()) {
