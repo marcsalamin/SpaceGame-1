@@ -29,9 +29,9 @@ public class GameCode extends PortableApplication {
 	public static float width  = (float) dimension.getWidth();
 	
 	//Class attributes
-	static ArrayList<Bullets> b = new ArrayList<Bullets>();
+	static ArrayList<Bullets> bullets = new ArrayList<Bullets>();
 	public static ArrayList <EnemySpaceShip> ves = new ArrayList <EnemySpaceShip>();
-	public static ArrayList<Items> i = new ArrayList<Items>();
+	public static ArrayList<Items> item = new ArrayList<Items>();
 	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL1);
 	static int timer;
 	
@@ -39,10 +39,9 @@ public class GameCode extends PortableApplication {
 	public GameCode(){
 		super((int)width,(int) height,true);
 	}
-	// ?????????
+	
+	//Create a random variable who stay fix 
 	Random r = new Random(124345);
-	Random rEnemy = new Random(124345);
-	Random rItem = new Random(124345);
 	
 	//Method to generate EnemyShip
 	public void generateEnemy(EnemySpaceShip.Category e){
@@ -50,45 +49,47 @@ public class GameCode extends PortableApplication {
 				5f, width / 80, 1, e);
 		ves.add(es);
 	}
+	
+	//Method to generate Bullets
 	public void generateBullet(Point p, float Vx, float Vy , State s){
 		Bullets b = new Bullets(p, Vx, Vy, s);
-		this.b.add(b);
+		this.bullets.add(b);
 	}
+	
+	//Method to generate Item depending the level of our spaceShip
 	public void generateItem(){
-
 		Point p = new Point(r.nextInt((int) width), (int) (9 * height / 10));
 		float Vx = (float)(Math.random()*width);
 		float Vy = -5f;
+		float hitBox = height/80;
 		Items mun;
-		switch (rItem.nextInt(2)){
+		
+		switch (r.nextInt(2)){
 		case 0:
-			Items life = new Items(p,Vx,Vy,GameCode.height/80,Items.Utility.life);
-			this.i.add(life);
+			Items life = new Items(p,Vx,Vy,hitBox,Items.Utility.life);
+			this.item.add(life);
 			break;
 		case 1:
 			if(os.getLevel()!= OurSpaceShip.Level.LEVEL3){
 				Items.Utility u = Items.Utility.munUpgrade;
-				mun = new Items(p,Vx,Vy,GameCode.height/80,u);
+				mun = new Items(p,Vx,Vy,hitBox,u);
 			}
 			else {
 				Items.Utility u = Items.Utility.life;
-				mun = new Items(p,Vx,Vy,GameCode.height/80,u);
+				mun = new Items(p,Vx,Vy,hitBox,u);
 				}
 			
-			this.i.add(mun);
+			this.item.add(mun);
 			break;
 		case 2:
 			Items shield = new Items(p,Vx,Vy,GameCode.height/80,Items.Utility.shield);
-			this.i.add(shield);
+			this.item.add(shield);
 			break;
-	}
-		
-		
+		}	
 	}
 	
 	@Override
 	public void onInit() {
-	//	generateEnemy(EnemySpaceShip.Category.ENEMY2);
 		generateItem();
 	}
 
@@ -115,17 +116,16 @@ public class GameCode extends PortableApplication {
 			generateItem();
 		}
 		if(timer%50 == 0){
-			switch(rEnemy.nextInt(2)){
+			switch(r.nextInt(2)){
 			case 0:
 				generateEnemy(EnemySpaceShip.Category.ENEMY1);
-			break;
+				break;
 			case 1:
 				generateEnemy(EnemySpaceShip.Category.ENEMY2);
-			break;
+				break;
 			case 2:
 				generateEnemy(EnemySpaceShip.Category.ENEMY3);
-			break;
-				
+				break;	
 			}
 		}
 		
@@ -162,15 +162,15 @@ public class GameCode extends PortableApplication {
 			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
 			ves.get(i).tick();
 		}
-		for(int j = 0; j< b.size();j++){
-			g.drawCircle((float)b.get(j).getPosition().getX(),(float) b.get(j).getPosition().getY(), b.get(j).getHitBox(), Color.BLACK);
-			b.get(j).tick();
+		for(int j = 0; j< bullets.size();j++){
+			g.drawCircle((float)bullets.get(j).getPosition().getX(),(float) bullets.get(j).getPosition().getY(), bullets.get(j).getHitBox(), Color.BLACK);
+			bullets.get(j).tick();
 		}
 		// Draw a gold circle for Items
-		for(int k = 0; k< i.size();k++){
-			System.out.println(i.get(k).getPosition());
-			g.drawAntiAliasedCircle((float)i.get(k).getPosition().getX(),(float) i.get(k).getPosition().getY(), i.get(k).getHitbox(), Color.GOLD);
-			i.get(k).tick();
+		for(int k = 0; k< item.size();k++){
+			System.out.println(item.get(k).getPosition());
+			g.drawAntiAliasedCircle((float)item.get(k).getPosition().getX(),(float) item.get(k).getPosition().getY(), item.get(k).getHitbox(), Color.GOLD);
+			item.get(k).tick();
 		}
 		
 		//Draw a blue circle for OurSpaceShip
