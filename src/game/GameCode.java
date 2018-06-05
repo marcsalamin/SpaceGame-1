@@ -180,7 +180,7 @@ public class GameCode extends PortableApplication {
 		
 		if(os.shield){
 			g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox()+10, Color.GREEN);
-			System.out.println("shield");
+			
 		}os.ticks();
 		
 		//Call the method tick() from Collision at all refresh
