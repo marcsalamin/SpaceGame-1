@@ -78,7 +78,7 @@ public class Collision {
 			boolean bulletDead = false;
 			// Collision between ally bullets and Boss
 			if(GameCode.boss.size()>0){
-			if(pOfBullet.getY()>(GameCode.height-GameCode.boss.get(0).getHeight())&&bul.getState().equals(Bullets.State.FRIEND)){
+			if(pOfBullet.getY()>(GameCode.height-GameCode.boss.get(0).getHitbox())&&bul.getState().equals(Bullets.State.FRIEND)){
 				GameCode.boss.get(0).healthDown();
 				bulletDead = true;
 				if(GameCode.boss.get(0).getHealth()<1){
