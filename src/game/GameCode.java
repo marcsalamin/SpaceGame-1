@@ -61,7 +61,7 @@ public class GameCode extends PortableApplication {
 		this.bullets.add(b);
 	}
 	public void generateBoss(){
-		Boss b = new Boss(new Point((int)width/2,(int)height-20),0f,40f,++nBoss);
+		Boss b = new Boss(new Point((int)width/2,(int)height-20),5f,40f,++nBoss);
 		boss.add(b);
 	}
 	

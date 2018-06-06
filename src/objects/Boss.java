@@ -36,7 +36,7 @@ public class Boss {
 	}
 	
 	public void ticks(){
-		if(p.getX()+ Vx < 0||p.getX()+Vx > GameCode.width)
+		if(p.getX()+ Vx <= 0||p.getX()+Vx >= GameCode.width)
 			this.Vx *=-1;
 		p.setLocation(p.getX() + Vx, p.getY());
 		
