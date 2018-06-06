@@ -26,7 +26,7 @@ public class GameCode extends PortableApplication {
 	//Recovery screen data
 	static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 	public static float height = (float) dimension.getHeight();
-	public static float width  = (float) dimension.getWidth();
+	public static float width  = (float) dimension.getWidth()/2;
 	
 	//Class attributes
 	static ArrayList<Bullets> bullets = new ArrayList<Bullets>();
@@ -41,7 +41,7 @@ public class GameCode extends PortableApplication {
 	
 	//Constructor
 	public GameCode(){
-		super((int)width,(int) height,true);
+		super((int)width,(int) height);
 	}
 	
 	//Create a random variable who stay fix 
@@ -60,7 +60,7 @@ public class GameCode extends PortableApplication {
 		this.bullets.add(b);
 	}
 	public void generateBoss(){
-		Boss b = new Boss(0f,(float)height-20,(float)width,(float) height,++nBoss);
+		Boss b = new Boss(new Point((int)width/2,(int)height-20),0f,40f,++nBoss);
 		boss.add(b);
 	}
 	
@@ -98,7 +98,7 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onInit() {
-		generateItem();
+		generateBoss();
 		nBoss = 0;
 	}
 
@@ -131,12 +131,12 @@ public class GameCode extends PortableApplication {
 			else {
 				if(timer%100==0){
 				for(int i = 0; i < width/2; i+=width/50 ){
-				generateBullet(new Point(i,(int)height-20), 0, 20, Bullets.State.ENEMY);
+				generateBullet(new Point(i,(int)height-20), 0, -20, Bullets.State.ENEMY);
 				}
 				}
 				if(timer%100 + 100 == 0){
 				for(int i = (int)width/2;i<width;i+=width/50){
-					generateBullet(new Point(i,(int)height-20), 0, 20, Bullets.State.ENEMY);
+					generateBullet(new Point(i,(int)height-20), 0, -20, Bullets.State.ENEMY);
 				}
 			}
 			}
@@ -192,7 +192,11 @@ public class GameCode extends PortableApplication {
 				generateBullet(ves.get(i).getPosition(),0,-20,Bullets.State.ENEMY);
 			}
 		}
-	
+		// Draw boss
+		if(boss.size()>0){
+		
+			g.drawCircle((float)boss.get(0).getPosition().getX(),(float)boss.get(0).getPosition().getY(),boss.get(0).hitbox, Color.BROWN);
+		}
 		
 		//Draw a red circle for all the EnemyShip
 		for(int i = 0; i< ves.size(); i++){

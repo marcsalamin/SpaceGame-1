@@ -83,10 +83,13 @@ public class EnemySpaceShip {
 		switch(this.c){
 		case ENEMY1:
 			this.Vx=(float)(Math.sin(d)*10);
-			if(this.p.getX()+ this.Vx < hitBox || this.p.getX()+this.Vx > GameCode.width - hitBox)
-				this.p.setLocation(this.p.getX(), this.p.getY() - this.Vy);
-			if(p.getX()+Vx < GameCode.width - hitBox && p.getX()- Vx > hitBox)
-				this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy); 
+			if(this.p.getX()+ this.Vx < hitBox || this.p.getX()+this.Vx > GameCode.width - hitBox){
+				this.Vx=0;
+				//this.p.setLocation(this.p.getX(), this.p.getY() - this.Vy);
+			}
+//			this.p.setLocation(this.p.getX(), this.p.getY() - this.Vy);
+			//if(p.getX()+Vx < GameCode.width - hitBox && p.getX()- Vx > hitBox)
+			this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy); 
 			d+=0.1/GameCode.ves.size();	
 			if(d==6.3)
 				d=0;
