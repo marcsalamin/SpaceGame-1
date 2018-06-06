@@ -40,6 +40,7 @@ public class Collision {
 			
 			if(GameCode.boss.get(0).getHealth()<1){
 				GameCode.boss.clear();
+				GameCode.score+=5;
 			}
 		}
 		}
@@ -162,6 +163,7 @@ public class Collision {
 			if (pOfEnemy.getY() <= borderScreen1.getY() || pOfEnemy.getY() >= borderScreen2.getY()) {
 
 				GameCode.ves.remove(i);
+				GameCode.score++;
 			}
 		}
 

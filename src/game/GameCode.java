@@ -37,6 +37,7 @@ public class GameCode extends PortableApplication {
 	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL1);
 	static int timer;
 	static int bossTimer;
+	static int score = 0;
 	int nBoss;
 	static boolean gameOver = false;
 	
@@ -61,7 +62,7 @@ public class GameCode extends PortableApplication {
 		this.bullets.add(b);
 	}
 	public void generateBoss(){
-		Boss b = new Boss(new Point((int)width/2,(int)height-20),5f,40f,++nBoss);
+		Boss b = new Boss(new Point((int)width/2,(int)height-40),5f,40f,++nBoss);
 		boss.add(b);
 	}
 	
@@ -99,7 +100,7 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onInit() {
-		generateBoss();
+		
 		nBoss = 0;
 	}
 
@@ -124,24 +125,17 @@ public class GameCode extends PortableApplication {
 		if(gameOver){
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
+			g.drawStringCentered(height/2-50,""+ score);
 		}
 		else{
 			if(boss.size()==0){
 				bossTimer++;
 			}
-			else {
-				if(timer%100==0){
-				for(int i = 0; i < width/2; i+=width/50 ){
-				generateBullet(new Point(i,(int)height-20), 0, -20, Bullets.State.ENEMY);
-				}
-				}
-				if(timer%100  == 100){
-				for(int i = (int)width/2;i<width;i+=width/50){
-					generateBullet(new Point(i,(int)height-20), 0, -20, Bullets.State.ENEMY);
-				}
-			}
-			}
-				
+			else if(timer%20==0){
+				if(boss.get(0).s.equals(Boss.State.HAPPY)){
+					generateBullet(boss.get(0).getPosition(), 0, -10, Bullets.State.ENEMY);
+			}else generateBullet(boss.get(0).getPosition(),(float) Math.random()*20, -10, Bullets.State.ENEMY);
+			}	
 		timer++;
 		g.clear(Color.WHITE);
 		if(bossTimer%5000 == 0){
@@ -150,7 +144,7 @@ public class GameCode extends PortableApplication {
 		if(timer% 10 ==0){
 			os.timerShield--;
 		}
-		if(timer%1000 == 0){
+		if(timer%500 == 0){
 			generateItem();
 		}
 		if(timer%50 == 0){
@@ -224,7 +218,7 @@ public class GameCode extends PortableApplication {
 		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();
-	}	
+			}	
 	}
 	
 	//Main method to launch the game

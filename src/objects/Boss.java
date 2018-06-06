@@ -6,11 +6,12 @@ import java.awt.Rectangle;
 import game.GameCode;
 
 public class Boss {
+	public enum State{ANGRY,HAPPY}
 	int hp;
-	Rectangle r;
 	float Vy = 0;
 	Point p;
 	float Vx;
+	public State s = State.HAPPY;
 	public float hitbox;
 	
 	
@@ -18,7 +19,7 @@ public class Boss {
 		this.p = p;
 		this.Vx = Vx;
 		this.hitbox = hitbox;
-		this.hp = 1000+ 100*nBoss;
+		this.hp = 100*nBoss;
 		 
 	}
 	
@@ -36,7 +37,12 @@ public class Boss {
 	}
 	
 	public void ticks(){
-		if(p.getX()+ Vx <= 0||p.getX()+Vx >= GameCode.width)
+		if(hp<20){
+			s = State.ANGRY;
+		}
+		else s = State.HAPPY;
+		
+		if(p.getX()+ Vx <= hitbox||p.getX()+Vx >= GameCode.width-hitbox)
 			this.Vx *=-1;
 		p.setLocation(p.getX() + Vx, p.getY());
 		
