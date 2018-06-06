@@ -38,7 +38,7 @@ public class GameCode extends PortableApplication {
 	static int timer;
 	static int bossTimer;
 	static int score = 0;
-	int nBoss;
+	static int nBoss;
 	static boolean gameOver = false;
 	
 	//Constructor
@@ -100,7 +100,7 @@ public class GameCode extends PortableApplication {
 	
 	@Override
 	public void onInit() {
-		
+		generateBoss();
 		nBoss = 0;
 	}
 
@@ -138,8 +138,9 @@ public class GameCode extends PortableApplication {
 			}	
 		timer++;
 		g.clear(Color.WHITE);
-		if(bossTimer%5000 == 0){
+		if(bossTimer%10 == 0){
 			generateBoss();
+			bossTimer++;
 		}
 		if(timer% 10 ==0){
 			os.timerShield--;

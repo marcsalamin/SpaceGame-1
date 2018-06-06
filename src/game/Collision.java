@@ -77,6 +77,7 @@ public class Collision {
 			Point pOfBullet = bul.getPosition();
 			float hitBoxOfBullet = bul.getHitBox();
 			boolean bulletDead = false;
+			
 			// Collision between ally bullets and Boss
 			if(GameCode.boss.size()>0){
 			if(pOfBullet.getY()>(GameCode.height-GameCode.boss.get(0).getHitbox())&&bul.getState().equals(Bullets.State.FRIEND)){

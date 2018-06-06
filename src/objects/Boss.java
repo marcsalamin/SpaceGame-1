@@ -11,7 +11,7 @@ public class Boss {
 	float Vy = 0;
 	Point p;
 	float Vx;
-	public State s = State.HAPPY;
+	public State s ;
 	public float hitbox;
 	
 	
@@ -20,6 +20,7 @@ public class Boss {
 		this.Vx = Vx;
 		this.hitbox = hitbox;
 		this.hp = 100*nBoss;
+		s = State.HAPPY;
 		 
 	}
 	
