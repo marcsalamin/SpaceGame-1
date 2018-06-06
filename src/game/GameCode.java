@@ -135,7 +135,7 @@ public class GameCode extends PortableApplication {
 				generateBullet(new Point(i,(int)height-20), 0, -20, Bullets.State.ENEMY);
 				}
 				}
-				if(timer%100 + 100 == 0){
+				if(timer%100  == 100){
 				for(int i = (int)width/2;i<width;i+=width/50){
 					generateBullet(new Point(i,(int)height-20), 0, -20, Bullets.State.ENEMY);
 				}
