@@ -32,8 +32,11 @@ public class GameCode extends PortableApplication {
 	static ArrayList<Bullets> bullets = new ArrayList<Bullets>();
 	public static ArrayList <EnemySpaceShip> ves = new ArrayList <EnemySpaceShip>();
 	public static ArrayList<Items> item = new ArrayList<Items>();
+	public static ArrayList<Boss> boss = new ArrayList<Boss>();
 	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL1);
 	static int timer;
+	static int bossTimer;
+	int nBoss;
 	static boolean gameOver = false;
 	
 	//Constructor
@@ -55,6 +58,10 @@ public class GameCode extends PortableApplication {
 	public void generateBullet(Point p, float Vx, float Vy , State s){
 		Bullets b = new Bullets(p, Vx, Vy, s);
 		this.bullets.add(b);
+	}
+	public void generateBoss(){
+		Boss b = new Boss(0f,(float)height-20,(float)width,(float) height,++nBoss);
+		boss.add(b);
 	}
 	
 	//Method to generate Item depending the level of our spaceShip
@@ -92,6 +99,7 @@ public class GameCode extends PortableApplication {
 	@Override
 	public void onInit() {
 		generateItem();
+		nBoss = 0;
 	}
 
 	@Override
@@ -117,8 +125,27 @@ public class GameCode extends PortableApplication {
 			g.drawStringCentered(height/2, "GAME OVER");
 		}
 		else{
+			if(boss.size()==0){
+				bossTimer++;
+			}
+			else {
+				if(timer%100==0){
+				for(int i = 0; i < width/2; i+=width/50 ){
+				generateBullet(new Point(i,(int)height-20), 0, 20, Bullets.State.ENEMY);
+				}
+				}
+				if(timer%100 + 100 == 0){
+				for(int i = (int)width/2;i<width;i+=width/50){
+					generateBullet(new Point(i,(int)height-20), 0, 20, Bullets.State.ENEMY);
+				}
+			}
+			}
+				
 		timer++;
 		g.clear(Color.WHITE);
+		if(bossTimer%5000 == 0){
+			generateBoss();
+		}
 		if(timer% 10 ==0){
 			os.timerShield--;
 		}

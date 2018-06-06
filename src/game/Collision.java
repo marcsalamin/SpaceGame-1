@@ -30,7 +30,16 @@ public class Collision {
 		ArrayList<Bullets> bulletsToDelete = new ArrayList<Bullets>();
 		Iterator<EnemySpaceShip> e;
 		ArrayList<EnemySpaceShip> enemyToDelete = new ArrayList<EnemySpaceShip>();
-
+		if(GameCode.boss.size()>0){
+		if(GameCode.os.getPosition().getY()>GameCode.height-GameCode.boss.get(0).getHeight()){
+			GameCode.os.helthDown();
+			GameCode.boss.get(0).healthDown();
+			
+			if(GameCode.boss.get(0).getHealth()<1){
+				GameCode.boss.clear();
+			}
+		}
+		}
 		e = GameCode.ves.iterator();
 		while (e.hasNext()) {
 			EnemySpaceShip enem = e.next();
@@ -64,6 +73,16 @@ public class Collision {
 			Point pOfBullet = bul.getPosition();
 			float hitBoxOfBullet = bul.getHitBox();
 			boolean bulletDead = false;
+			// Collision between ally bullets and Boss
+			if(GameCode.boss.size()>0){
+			if(pOfBullet.getY()>(GameCode.height-GameCode.boss.get(0).getHeight())&&bul.getState().equals(Bullets.State.FRIEND)){
+				GameCode.boss.get(0).healthDown();
+				bulletDead = true;
+				if(GameCode.boss.get(0).getHealth()<1){
+					GameCode.boss.clear();
+					}
+				}
+			}
 
 			// Collision between enemy bullets and OurSpaceShip
 			if (pOfBullet.distance(pOfOurSpaceShip) < (hitBoxOfBullet + hitBoxOfOurSpaceShip) && bul.getState().equals(Bullets.State.ENEMY)) {
