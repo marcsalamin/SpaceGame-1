@@ -31,9 +31,12 @@ public class Collision {
 		Iterator<EnemySpaceShip> e;
 		ArrayList<EnemySpaceShip> enemyToDelete = new ArrayList<EnemySpaceShip>();
 		if(GameCode.boss.size()>0){
-		if(GameCode.os.getPosition().getY()>GameCode.height-GameCode.boss.get(0).getHeight()){
+		if(GameCode.os.getPosition().distance(GameCode.boss.get(0).getPosition())<GameCode.os.getHitBox()+GameCode.boss.get(0).getHitbox()){
 			GameCode.os.helthDown();
 			GameCode.boss.get(0).healthDown();
+			if (GameCode.os.getHealth() < 1) {
+				GameCode.lost();
+			}
 			
 			if(GameCode.boss.get(0).getHealth()<1){
 				GameCode.boss.clear();
