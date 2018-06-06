@@ -108,7 +108,7 @@ public class Collision {
 
 				for (int k = 0; k < GameCode.item.size(); k++) {
 					// collision between bullets and Items
-					if (pOfBullet.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitbox() + hitBoxOfBullet){
+					if (pOfBullet.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitbox() + hitBoxOfBullet&&bul.getState().equals(Bullets.State.FRIEND)){
 
 				
 				
