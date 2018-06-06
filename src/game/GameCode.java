@@ -195,8 +195,8 @@ public class GameCode extends PortableApplication {
 		}
 		// Draw boss
 		if(boss.size()>0){
-		
 			g.drawCircle((float)boss.get(0).getPosition().getX(),(float)boss.get(0).getPosition().getY(),boss.get(0).hitbox, Color.BROWN);
+			boss.get(0).ticks();
 		}
 		
 		//Draw a red circle for all the EnemyShip

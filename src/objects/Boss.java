@@ -3,6 +3,8 @@ package objects;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import game.GameCode;
+
 public class Boss {
 	int hp;
 	Rectangle r;
@@ -34,7 +36,9 @@ public class Boss {
 	}
 	
 	public void ticks(){
-		
+		if(p.getX()+ Vx < 0||p.getX()+Vx > GameCode.width)
+			this.Vx *=-1;
+		p.setLocation(p.getX() + Vx, p.getY());
 		
 	}
 
