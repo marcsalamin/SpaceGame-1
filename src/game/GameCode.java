@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
+import objects.Boss;
 import objects.Bullets;
 import objects.Bullets.State;
 import objects.EnemySpaceShip;
