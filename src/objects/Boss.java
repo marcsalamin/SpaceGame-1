@@ -6,7 +6,11 @@ import java.awt.Rectangle;
 import game.GameCode;
 
 public class Boss {
+	
+	//enum to increase the diffcutly if the boss hasn't a lot of health
 	public enum State{ANGRY,HAPPY}
+	
+	//Class attributes
 	int hp;
 	float Vy = 0;
 	Point p;
@@ -14,7 +18,7 @@ public class Boss {
 	public State s ;
 	public float hitbox;
 	
-	
+	//Constructor
 	public Boss(Point p, float Vx, float hitbox,int nBoss){
 		this.p = p;
 		this.Vx = Vx;

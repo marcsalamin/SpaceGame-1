@@ -21,6 +21,8 @@ public class Collision {
 		// Data recovery from OurSpaceShip
 		Point pOfOurSpaceShip = GameCode.os.getPosition();
 		float hitBoxOfOurSpaceShip = GameCode.os.getHitBox();
+		
+		//Data recovery from the border screen
 		Point borderScreen1 = new Point(0, 0);
 		Point borderScreen2 = new Point((int) GameCode.width, (int) GameCode.height);
 
@@ -30,6 +32,8 @@ public class Collision {
 		ArrayList<Bullets> bulletsToDelete = new ArrayList<Bullets>();
 		Iterator<EnemySpaceShip> e;
 		ArrayList<EnemySpaceShip> enemyToDelete = new ArrayList<EnemySpaceShip>();
+		
+		//Collision between our space ship and the Boss
 		if(GameCode.boss.size()>0){
 		if(GameCode.os.getPosition().distance(GameCode.boss.get(0).getPosition())<GameCode.os.getHitBox()+GameCode.boss.get(0).getHitbox()){
 			GameCode.os.helthDown();
@@ -64,6 +68,8 @@ public class Collision {
 					GameCode.lost();
 				}
 			}
+			
+			//Delete all the dead enemy
 			if (enemySpaceShipDead) {
 				enemyToDelete.add(enem);
 			}
@@ -72,8 +78,8 @@ public class Collision {
 		b = GameCode.bullets.iterator();
 		while(b.hasNext()) {
 
-			Bullets bul = b.next();
 			// Data recovery from the bullets
+			Bullets bul = b.next();
 			Point pOfBullet = bul.getPosition();
 			float hitBoxOfBullet = bul.getHitBox();
 			boolean bulletDead = false;
@@ -129,9 +135,8 @@ public class Collision {
 					continue;
 				}
 
-
+				// collision between our bullets and Items
 				for (int k = 0; k < GameCode.item.size(); k++) {
-					// collision between bullets and Items
 					if (pOfBullet.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitbox() + hitBoxOfBullet&&bul.getState().equals(Bullets.State.FRIEND)){
 
 				
@@ -147,33 +152,28 @@ public class Collision {
 			}
 
 		}
-
+		// remove the enemy space ship if a collision was detected
 		for (EnemySpaceShip enem : enemyToDelete) {
 			GameCode.ves.remove(enem);
 		}
 
-		
+		// remove the bullet if a collision was detected
 		for(Bullets  bul: bulletsToDelete){
 			GameCode.bullets.remove(bul);
 
 		}
-
+		// Collision between Screen and EnemyShip
 		for (int i = 0; i < GameCode.ves.size(); i++) {
 			Point pOfEnemy = GameCode.ves.get(i).getPosition();
-			// Collision between Screen and EnemyShip
 			if (pOfEnemy.getY() <= borderScreen1.getY() || pOfEnemy.getY() >= borderScreen2.getY()) {
 
 				GameCode.ves.remove(i);
 				GameCode.score++;
 			}
 		}
-
+		// Collision between Screen and bullets
 		for (int i = 0; i < GameCode.bullets.size(); i++) {
 			Point pOfBullet = GameCode.bullets.get(i).getPosition();
-
-		
-
-			// Collision between Screen and bullets
 			if (pOfBullet.getY() <= borderScreen1.getY() || pOfBullet.getY() >= borderScreen2.getY()) {
 
 				GameCode.bullets.remove(i);

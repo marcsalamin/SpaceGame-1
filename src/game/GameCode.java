@@ -102,7 +102,7 @@ public class GameCode extends PortableApplication {
 	@Override
 	// Method to initials
 	public void onInit() {
-		generateBoss();
+
 		nBoss = 0;
 	}
 

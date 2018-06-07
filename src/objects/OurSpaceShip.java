@@ -71,7 +71,7 @@ public class OurSpaceShip {
 			
 		}
 	}
-	
+	//Method to actualize the Object
 	public void ticks(){
 		if(timerShield < 0){
 			shield = false;

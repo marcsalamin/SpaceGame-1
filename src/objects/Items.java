@@ -5,6 +5,7 @@ import java.awt.Point;
 import game.GameCode;
 
 public class Items {
+	//Class attributes
 	public enum  Utility {munUpgrade, shield, life}
 	Point p;
 	float Vx;
@@ -13,6 +14,7 @@ public class Items {
 	int hp;
 	Utility u;
 	
+	//Constructor 
 	public Items(Point p, float Vx, float Vy,float hitbox, Utility u){
 		this.p = p;
 		this.Vx = Vx;
@@ -21,21 +23,32 @@ public class Items {
 		this.hp = 1;
 		this.hitBox = hitbox;		
 	}
+	
+	//Method to reduce health
 	public void healthDown(){
 		hp--;
 	}
+	
+	//Method to get the Position
 	public Point getPosition(){
 		return p;
 	}
+	
+	//Method to get the hitbox
 	public float getHitbox(){
 		return hitBox;
 	}
+	
+	//Method to get the health
 	public int getHealth(){
 		return hp;
 	}
+	//Method to get the utility
 	public Utility getUtility(){
 		return u;
 	}
+	
+	//Method to actualize the Object
 	public void tick(){
 		if(this.Vx==0){
 			double sign = Math.random();

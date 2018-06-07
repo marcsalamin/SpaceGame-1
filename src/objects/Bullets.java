@@ -63,7 +63,7 @@ public class Bullets {
 		return s;
 	}
 	
-	//Method 
+	//Method to actualize the Object
 	public void tick(){
 		this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
 	}
