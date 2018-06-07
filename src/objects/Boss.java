@@ -7,7 +7,7 @@ import game.GameCode;
 
 public class Boss {
 	
-	//enum to increase the diffcutly if the boss hasn't a lot of health
+	//enum to increase the difficulty if the boss hasn't a lot of health
 	public enum State{ANGRY,HAPPY}
 	
 	//Class attributes
@@ -28,15 +28,22 @@ public class Boss {
 		 
 	}
 	
+	//Method to get the position
 	public Point getPosition(){
 		return p;
 	}
+	
+	//Method to get the hitbox
 	public float getHitbox(){
 		return  hitbox;
 	}
+	
+	//Method to lower the Boss's life
 	public void healthDown(){
 		hp--;
 	}
+	
+	//Method to get the health of the Boss
 	public int getHealth(){
 		return hp;
 	}
