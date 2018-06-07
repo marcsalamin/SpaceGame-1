@@ -61,6 +61,7 @@ public class GameCode extends PortableApplication {
 		Bullets b = new Bullets(p, Vx, Vy, s);
 		this.bullets.add(b);
 	}
+	//Method to generate Boss
 	public void generateBoss(){
 		Boss b = new Boss(new Point((int)width/2,(int)height-40),5f,40f,++nBoss);
 		boss.add(b);
@@ -73,7 +74,7 @@ public class GameCode extends PortableApplication {
 		float Vy = 5f;
 		float hitBox = height/80;
 		Items mun;
-		
+		// switch to choose randomly witch bonus is going to give this item
 		switch (r.nextInt(3)){
 		case 0:
 			Items life = new Items(p,Vx,Vy,hitBox,Items.Utility.life);
@@ -99,55 +100,69 @@ public class GameCode extends PortableApplication {
 	}
 	
 	@Override
+	// Method to initials
 	public void onInit() {
 		generateBoss();
 		nBoss = 0;
 	}
 
 	@Override
+	//Method to detect if a key is pressed
 	public void onKeyDown(int keycode) {
 		super.onKeyDown(keycode);
 		os.onKeyDown(keycode);
 		
 	}
-
+	//Method to detect if a key is released
 	public void onKeyUp(int keycode) {
 		os.onKeyUp(keycode);
 	}
-	
+	//Method to stop the game
 	public static void lost(){
 		gameOver = true;
 		
 	}
 	
 	@Override
+	// Graph and timer to generate all
 	public void onGraphicRender(GdxGraphics g) {
+		
+		//Write GameOver and the number of enemy that u killed (1p for enemy, 5p for Boss)
 		if(gameOver){
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
 			g.drawStringCentered(height/2-50,"You killed "+ score + " enemys");
 		}
 		else{
+			//If there is no Boss increase the BossTimer
 			if(boss.size()==0){
 				bossTimer++;
 			}
+			//Generate Boss's bullets 
 			else if(timer%20==0){
 				if(boss.get(0).s.equals(Boss.State.HAPPY)){
 					generateBullet(boss.get(0).getPosition(), 0, -10, Bullets.State.ENEMY);
 			}else generateBullet(boss.get(0).getPosition(),(float) Math.random()*20, -10, Bullets.State.ENEMY);
 			}	
 		timer++;
+		
+		//Clear
 		g.clear(Color.WHITE);
-		if(bossTimer%10 == 0){
+		
+		//Generate Boss
+		if(bossTimer%1000 == 0){
 			generateBoss();
 			bossTimer++;
 		}
+		//Actualyse the timer of our shield
 		if(timer% 10 ==0){
 			os.timerShield--;
 		}
+		//Generate Item
 		if(timer%500 == 0){
 			generateItem();
 		}
+		//Generate randomly enemy
 		if(timer%50 == 0){
 			switch(r.nextInt(2)){
 			case 0:
@@ -161,17 +176,19 @@ public class GameCode extends PortableApplication {
 				break;	
 			}
 		}
-		
+		//Generate ally bullets lvl 1
 		if(timer%20 == 0){
 				if(os.getLevel() == OurSpaceShip.Level.LEVEL1)
 					generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
+				
+		//Generate ally bullets lvl 2
 				if(os.getLevel() == OurSpaceShip.Level.LEVEL2){
 					generateBullet(os.getPosition(),0,20,Bullets.State.FRIEND);
 					generateBullet(os.getPosition(),10,20,Bullets.State.FRIEND);
 					generateBullet(os.getPosition(),-10,20,Bullets.State.FRIEND);
 				}
 		}
-		
+		//Generate ally bullets lvl 3
 		if(os.getLevel() == OurSpaceShip.Level.LEVEL3){
 			if(timer%10==0){
 				if(os.getLevel() == OurSpaceShip.Level.LEVEL3){
@@ -182,7 +199,7 @@ public class GameCode extends PortableApplication {
 				}
 			}
 		}
-		
+		//Generate an enemy's bullet
 		if(timer%50 == 0){
 			for(int i = 0; i< ves.size(); i++){
 				generateBullet(ves.get(i).getPosition(),0,-20,Bullets.State.ENEMY);
@@ -199,6 +216,7 @@ public class GameCode extends PortableApplication {
 			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
 			ves.get(i).tick();
 		}
+		//Draw a black circle for all the bullets
 		for(int j = 0; j< bullets.size();j++){
 			g.drawCircle((float)bullets.get(j).getPosition().getX(),(float) bullets.get(j).getPosition().getY(), bullets.get(j).getHitBox(), Color.BLACK);
 			bullets.get(j).tick();
@@ -212,6 +230,7 @@ public class GameCode extends PortableApplication {
 		//Draw a blue circle for OurSpaceShip
 		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
 		
+		//Draw a green circle for the shield
 		if(os.shield){
 			g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox()+10, Color.GREEN);
 			
