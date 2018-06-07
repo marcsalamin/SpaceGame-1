@@ -24,6 +24,14 @@ public class Bullets {
 	//Constructor
 	public Bullets(Point p, float Vx, float Vy , State s){
 		 this.p = (Point)p.clone();
+		 if(s.equals(State.FRIEND)){
+			 this.Vx = Vx;
+			 this.Vy = Math.abs(Vy);
+		 }
+		 else{
+			 this.Vx = Vx;
+			 this.Vy = Math.abs(Vy)*-1;
+		 }
 		 this.Vx = Vx;
 		 this.Vy = Vy;
 		 this.s = s;

@@ -16,7 +16,7 @@ public class Items {
 	public Items(Point p, float Vx, float Vy,float hitbox, Utility u){
 		this.p = p;
 		this.Vx = Vx;
-		this.Vy = Vy;
+		this.Vy =Math.abs(Vy)*-1;
 		this.u = u;
 		this.hp = 1;
 		this.hitBox = hitbox;		
@@ -46,7 +46,7 @@ public class Items {
 		if(this.p.getX()+ this.Vx < 0||this.p.getX()+this.Vx > GameCode.width)
 			this.Vx *=-1;
 		if(p.getX()+Vx < GameCode.width &&p.getX()+ Vx > 0)
-			this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()-this.Vy);
+			this.p.setLocation(this.p.getX()+this.Vx, this.p.getY()+this.Vy);
 	}
 
 }

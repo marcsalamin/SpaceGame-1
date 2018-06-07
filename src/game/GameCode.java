@@ -125,7 +125,7 @@ public class GameCode extends PortableApplication {
 		if(gameOver){
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
-			g.drawStringCentered(height/2-50,""+ score);
+			g.drawStringCentered(height/2-50,"You killed "+ score + "enemys");
 		}
 		else{
 			if(boss.size()==0){
