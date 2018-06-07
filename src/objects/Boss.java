@@ -37,6 +37,7 @@ public class Boss {
 		return hp;
 	}
 	
+	//Method to actualize the Object
 	public void ticks(){
 		if(hp<20){
 			s = State.ANGRY;
