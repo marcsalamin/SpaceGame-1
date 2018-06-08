@@ -129,6 +129,7 @@ public class GameCode extends PortableApplication {
 		
 		//Write GameOver and the number of enemy that u killed (1p for enemy, 5p for Boss)
 		if(gameOver){
+			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
 			HighScore.ranking(score);
@@ -138,6 +139,12 @@ public class GameCode extends PortableApplication {
 			}
 		}
 		else{
+			g.setColor(Color.BLACK);
+			//Draw life
+			g.drawString(30, 100, "Life : "+os.getHealth()+" <3");
+			
+			//Draw score
+			g.drawString(width-100, 100, "Score :"+score);
 			//If there is no Boss increase the BossTimer
 			if(boss.size()==0){
 				bossTimer++;
