@@ -9,8 +9,10 @@ import javafx.scene.shape.Circle;
 
 public class OurSpaceShip {
 	
+	//Enum to know if it's a friendly bullet or not
 	public enum Level {LEVEL1, LEVEL2, LEVEL3};
 	
+	//Class attributes
 	private static Point p;
 	private static float Vx, Vy;
 	private float hitBox;
@@ -20,6 +22,7 @@ public class OurSpaceShip {
 	public static int timerShield;
 	public static int timerMun;
 	
+	//Constructor
 	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp, Level l){
 		this.p = p;
 		this.Vx = Vx;
@@ -28,28 +31,31 @@ public class OurSpaceShip {
 		this.hp = 3;
 		this.l = l;
 	}
-	
+	//Method to get the bullets lvl
 	public Level getLevel(){
 		return l;
 	}
-	
+	//Setter for the bullets lvl
 	public void setLevel(Level l){
 		this.l = l;
 	}
-	
+	//Method to get the position of our space ship
 	public static Point getPosition(){
 		return p;
 	}
+	//Method to lower the hp of our space ship
 	public static void helthDown(){
 		hp--;
 	}
+	//Method to get the hit box of our space ship
 	public float getHitBox(){
 		return hitBox;
 	}
-	
+	//Method to get the hp of our space ship
 	public int getHealth(){
 		return hp;
 	}
+	//Method to lower the bullets lvl
 	public void lower(){
 		timerMun = 200;
 		switch(l){
@@ -64,6 +70,7 @@ public class OurSpaceShip {
 			break;
 		}
 	}
+	//Method to upgrade our bullets lvl
 	public void upgrade(Items.Utility u){
 		if(u == Items.Utility.munUpgrade){
 			timerMun = 200;
