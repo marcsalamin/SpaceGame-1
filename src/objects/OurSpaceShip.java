@@ -18,6 +18,7 @@ public class OurSpaceShip {
 	private Level l;
 	public boolean shield = false;
 	public static int timerShield;
+	public static int timerMun;
 	
 	public OurSpaceShip(Point p, float Vx, float Vy, float hitBox, int hp, Level l){
 		this.p = p;
@@ -49,8 +50,23 @@ public class OurSpaceShip {
 	public int getHealth(){
 		return hp;
 	}
+	public void lower(){
+		timerMun = 200;
+		switch(l){
+		case LEVEL3 :
+			l = Level.LEVEL2;
+			break;
+		case LEVEL2 :
+			l = Level.LEVEL1;
+			break;
+		case LEVEL1 :
+			l = Level.LEVEL1;
+			break;
+		}
+	}
 	public void upgrade(Items.Utility u){
 		if(u == Items.Utility.munUpgrade){
+			timerMun = 200;
 			switch (l){
 			case LEVEL1 :
 				l = Level.LEVEL2;
@@ -75,6 +91,9 @@ public class OurSpaceShip {
 	public void ticks(){
 		if(timerShield < 0){
 			shield = false;
+		}
+		if(timerMun<0){
+			lower();
 		}
 		p.setLocation(p.getX() + Vx, p.getY() + Vy);
 		

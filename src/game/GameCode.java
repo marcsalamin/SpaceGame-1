@@ -52,7 +52,7 @@ public class GameCode extends PortableApplication {
 	//Method to generate EnemyShip
 	public void generateEnemy(EnemySpaceShip.Category e){
 		EnemySpaceShip es = new EnemySpaceShip(new Point(r.nextInt((int) width), (int) (9 * height / 10)), (float) 0,
-				5f, width / 80, 1, e);
+				2f, width / 80, 1, e);
 		ves.add(es);
 	}
 	
@@ -141,7 +141,22 @@ public class GameCode extends PortableApplication {
 		else{
 			g.setColor(Color.BLACK);
 			//Draw life
-			g.drawString(30, 100, "Life : "+os.getHealth()+" <3");
+			if(os.getHealth()> 3){
+				g.drawString(30, 100, "Life : "+os.getHealth()+" <3");
+			}
+			else if(os.getHealth()==3){
+				g.drawString(30, 100, "Life : <3 <3 <3");
+				
+			}
+			else if(os.getHealth()==2){
+				g.drawString(30, 100, "Life : <3 <3");
+				
+			}
+			else if(os.getHealth()==1){
+				g.drawString(30, 100, "Life : <3");
+				
+			}
+			
 			
 			//Draw score
 			g.drawString(width-100, 100, "Score :"+score);
@@ -169,6 +184,12 @@ public class GameCode extends PortableApplication {
 		if(timer% 10 ==0){
 			os.timerShield--;
 		}
+		//Actualyse the timer of our bullets lvl
+		if(timer%10 ==0){
+			if(!os.getLevel().equals(OurSpaceShip.Level.LEVEL1))
+			os.timerMun--;
+		}
+		
 		//Generate Item
 		if(timer%500 == 0){
 			generateItem();
@@ -211,9 +232,9 @@ public class GameCode extends PortableApplication {
 			}
 		}
 		//Generate an enemy's bullet
-		if(timer%50 == 0){
+		if(timer%100 == 0){
 			for(int i = 0; i< ves.size(); i++){
-				generateBullet(ves.get(i).getPosition(),0,-20,Bullets.State.ENEMY);
+				generateBullet(ves.get(i).getPosition(),0,-10,Bullets.State.ENEMY);
 			}
 		}
 		// Draw boss

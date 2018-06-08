@@ -155,6 +155,7 @@ public class Collision {
 		// remove the enemy space ship if a collision was detected
 		for (EnemySpaceShip enem : enemyToDelete) {
 			GameCode.ves.remove(enem);
+			GameCode.score++;
 		}
 
 		// remove the bullet if a collision was detected
@@ -168,7 +169,7 @@ public class Collision {
 			if (pOfEnemy.getY() <= borderScreen1.getY() || pOfEnemy.getY() >= borderScreen2.getY()) {
 
 				GameCode.ves.remove(i);
-				GameCode.score++;
+			
 			}
 		}
 		// Collision between Screen and bullets
