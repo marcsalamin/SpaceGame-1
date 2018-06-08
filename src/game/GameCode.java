@@ -275,7 +275,14 @@ public class GameCode extends PortableApplication {
 	
 	//Main method to launch the game
 	public static void main(String[] args) {
+	
+		if(GameMenu.gameMenu){
+			GameMenu g = new GameMenu();
+			g.setVisible(GameMenu.gameMenu);	
+		}
+		else
 		new GameCode();
 	}
+	
 
 }
