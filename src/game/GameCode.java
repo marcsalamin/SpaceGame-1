@@ -102,7 +102,7 @@ public class GameCode extends PortableApplication {
 	@Override
 	// Method to initials
 	public void onInit() {
-
+		HighScore.newHighScore = false;
 		nBoss = 0;
 	}
 
@@ -131,7 +131,11 @@ public class GameCode extends PortableApplication {
 		if(gameOver){
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
+			HighScore.ranking(score);
 			g.drawStringCentered(height/2-50,"You killed "+ score + " enemys");
+			if(HighScore.newHighScore){
+			g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
+			}
 		}
 		else{
 			//If there is no Boss increase the BossTimer
