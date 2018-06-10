@@ -195,7 +195,13 @@ public class GameCode extends PortableApplication {
 		else if(timer%20==0){
 			if(boss.get(0).s.equals(Boss.State.HAPPY)){
 				generateBullet(boss.get(0).getPosition(), 0, -10, Bullets.State.ENEMY);
-			}else generateBullet(boss.get(0).getPosition(),(float) Math.random()*20, -10, Bullets.State.ENEMY);
+			}else{
+				int sign = 1;
+				if(Math.random()<0.5){
+					sign=-1;
+				}
+				generateBullet(boss.get(0).getPosition(),(float) Math.random()*20*sign, -10, Bullets.State.ENEMY);
+			}
 		}	
 		timer++;
 
@@ -327,8 +333,8 @@ public class GameCode extends PortableApplication {
 	
 	//Main method to launch the game
 	public static void main(String[] args) {
-//		new GameMenu();
-		new GameCode();
+		new GameMenu();
+
 	}
 	
 	

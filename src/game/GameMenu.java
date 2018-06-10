@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import ch.hevs.gdx2d.demos.menus.DemoGUI;
+//import ch.hevs.gdx2d.demos.menus.DemoGUI;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.utils.Logger;
@@ -29,24 +30,39 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  */
 public class GameMenu extends JFrame{
 	public static boolean gameMenu = true;
-	public class ClickListener implements ActionListener{
-		public ClickListener(){
-			gameMenu = false;
-			
-		}
-	}
-	public void actionPerformed(ActionEvent e){
-		
-	}
+
+
+	
+
 	GameMenu(){
 		setTitle("Space Shooter");
-		setSize((int)GameCode.width/2,(int)GameCode.height/2);
+		setSize((int)GameCode.width/10,(int)GameCode.height/10);
 		setLocation(new Point((int)GameCode.width/2,(int)GameCode.height/2));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(2, 1));
 		
 		JButton play = new JButton("Play");
-		JButton score = new JButton("High Score");
+		JButton score = new JButton("Score");
 		
-		play.addActionListener(ClickListener());
+		play.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				dispose();
+				new GameCode();
+			}
+		});
+		score.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				for(int i = 0; i<HighScore.highScore.length;i++){
+					System.out.println(HighScore.highScore[i]);
+				}
+		
+			}
+		});
+		add(play);
+		add(score);
+		setVisible(true);
+		
+		
 	}
 
 }

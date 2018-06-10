@@ -50,7 +50,7 @@ public class Boss {
 	
 	//Method to actualize the Object
 	public void ticks(){
-		if(hp<20){
+		if(hp<50){
 			s = State.ANGRY;
 		}
 		else s = State.HAPPY;
