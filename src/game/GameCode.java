@@ -223,7 +223,7 @@ public class GameCode extends PortableApplication {
 		}
 		
 		//Generate Item
-		if(timer%500 == 0){
+		if(timer%700 == 0){
 			generateItem();
 		}
 		//Generate randomly enemy
