@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
@@ -164,31 +165,27 @@ public class GameCode extends PortableApplication {
 			}
 			g.drawStringCentered(height/2-150, "Would you play again? Y/N");
 			//lire entrée utilisateur + rejouer si y ou exit si n
+			
 		}
 		else{
-//			g.setColor(Color.BLACK);
-			//Draw life
-//			if(os.getHealth()> 3){
-//				g.drawString(30, 100, "Life : "+os.getHealth()+" <3");
-//			}
-//			else if(os.getHealth()==3){
-//				g.drawString(30, 100, "Life : <3 <3 <3");
-//				
-//			}
-//			else if(os.getHealth()==2){
-//				g.drawString(30, 100, "Life : <3 <3");
-//				
-//			}
-//			else if(os.getHealth()==1){
-//				g.drawString(30, 100, "Life : <3");
+			g.setColor(Color.WHITE);
+
 			
 			
 			//Draw score
 			g.drawString(width-100, 100, "Score :"+score);
+		//Draw Life
+		if(os.getHealth()> 3){
+			g.drawString(30, 100,os.getHealth()+"X");
+			g.drawTransformedPicture(100, 100, 0f, height/80, height/80, life);
 		}
+		else{
 		for(int l = 0; l<os.getHealth(); l++){
-			g.drawTransformedPicture(width + l*100, height, 0f, height/80, height/80, life);	
+			g.drawTransformedPicture(l*100+100, 100, 0f, height/80, height/80, life);	
+
+			}
 		}
+
 		
 		//If there is no Boss increase the BossTimer
 		if(boss.size()==0){
@@ -324,7 +321,8 @@ public class GameCode extends PortableApplication {
 		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();
-			}	
+			}
+	}
 	
 	
 	//Main method to launch the game

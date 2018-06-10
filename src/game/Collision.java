@@ -105,6 +105,7 @@ public class Collision {
 					GameCode.os.helthDown();
 				if (GameCode.os.getHealth() < 1) {
 					 GameCode.lost();
+				
 				}
 			}
 
