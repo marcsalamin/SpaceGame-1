@@ -19,7 +19,7 @@ public class EnemySpaceShip {
 	private float hitBox;
 	private int hp;
 	static double d;
-	Category c;
+	public Category category;
 	
 	//Constructor
 	public EnemySpaceShip(Point p,float Vx, float Vy,float hitBox,int hp, Category c){
@@ -28,7 +28,7 @@ public class EnemySpaceShip {
 		this.Vy = Math.abs(Vy)*-1;
 		this.hitBox = hitBox;
 		this.hp = hp;
-		this.c = c;
+		category = c;
 	}
 	
 	//Getter and setter
@@ -80,7 +80,7 @@ public class EnemySpaceShip {
 	
 	//Method tick is to manage the move of enemy ship at each refresh. Each category of enemies has a specific movement 
 	public void tick(){
-		switch(this.c){
+		switch(category){
 		case ENEMY1:
 			this.Vx=(float)(Math.sin(d)*10);
 			if(this.p.getX()+ this.Vx < hitBox || this.p.getX()+this.Vx > GameCode.width - hitBox){

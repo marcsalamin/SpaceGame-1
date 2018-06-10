@@ -12,14 +12,14 @@ public class Items {
 	float Vy;
 	float hitBox;
 	int hp;
-	Utility u;
+	Utility utility;
 	
 	//Constructor 
 	public Items(Point p, float Vx, float Vy,float hitbox, Utility u){
 		this.p = p;
 		this.Vx = Vx;
 		this.Vy =Math.abs(Vy)*-1;
-		this.u = u;
+		this.utility = u;
 		this.hp = 1;
 		this.hitBox = hitbox;		
 	}
@@ -35,7 +35,7 @@ public class Items {
 	}
 	
 	//Method to get the hitbox
-	public float getHitbox(){
+	public float getHitBox(){
 		return hitBox;
 	}
 	
@@ -45,7 +45,7 @@ public class Items {
 	}
 	//Method to get the utility
 	public Utility getUtility(){
-		return u;
+		return utility;
 	}
 	
 	//Method to actualize the Object

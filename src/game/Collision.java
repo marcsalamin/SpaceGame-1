@@ -35,7 +35,7 @@ public class Collision {
 		
 		//Collision between our space ship and the Boss
 		if(GameCode.boss.size()>0){
-		if(GameCode.os.getPosition().distance(GameCode.boss.get(0).getPosition())<GameCode.os.getHitBox()+GameCode.boss.get(0).getHitbox()){
+		if(GameCode.os.getPosition().distance(GameCode.boss.get(0).getPosition())<GameCode.os.getHitBox()+GameCode.boss.get(0).getHitBox()){
 			GameCode.os.helthDown();
 			GameCode.boss.get(0).healthDown();
 			if (GameCode.os.getHealth() < 1) {
@@ -86,7 +86,7 @@ public class Collision {
 			
 			// Collision between ally bullets and Boss
 			if(GameCode.boss.size()>0){
-			if(pOfBullet.getY()>(GameCode.height-GameCode.boss.get(0).getHitbox())&&bul.getState().equals(Bullets.State.FRIEND)){
+			if(pOfBullet.getY()>(GameCode.height-GameCode.boss.get(0).getHitBox())&&bul.getState().equals(Bullets.State.FRIEND)){
 				GameCode.boss.get(0).healthDown();
 				bulletDead = true;
 				if(GameCode.boss.get(0).getHealth()<1){
@@ -137,7 +137,7 @@ public class Collision {
 
 				// collision between our bullets and Items
 				for (int k = 0; k < GameCode.item.size(); k++) {
-					if (pOfBullet.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitbox() + hitBoxOfBullet&&bul.getState().equals(Bullets.State.FRIEND)){
+					if (pOfBullet.distance(GameCode.item.get(k).getPosition()) < GameCode.item.get(k).getHitBox() + hitBoxOfBullet&&bul.getState().equals(Bullets.State.FRIEND)){
 
 				
 				

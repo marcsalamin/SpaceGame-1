@@ -8,12 +8,14 @@ import java.util.Vector;
 
 import com.badlogic.gdx.graphics.Color;
 
+import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import objects.Boss;
 import objects.Bullets;
 import objects.Bullets.State;
 import objects.EnemySpaceShip;
+import objects.EnemySpaceShip.Category;
 import objects.Items;
 import objects.OurSpaceShip;
 
@@ -34,12 +36,21 @@ public class GameCode extends PortableApplication {
 	public static ArrayList <EnemySpaceShip> ves = new ArrayList <EnemySpaceShip>();
 	public static ArrayList<Items> item = new ArrayList<Items>();
 	public static ArrayList<Boss> boss = new ArrayList<Boss>();
-	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/80, 3, OurSpaceShip.Level.LEVEL1);
+	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/40, 3, OurSpaceShip.Level.LEVEL1);
 	static int timer;
 	static int bossTimer;
 	static int score = 0;
 	static int nBoss;
 	static boolean gameOver = false;
+	
+	//Pictures
+	BitmapImage theBoss;
+	BitmapImage enemy1, enemy2, enemy3;
+	BitmapImage ourShip;
+	BitmapImage enemyBullets, ourBullets;
+	BitmapImage shield, life, munUp;
+	BitmapImage shieldOnShip;
+	BitmapImage backGround;
 	
 	//Constructor
 	public GameCode(){
@@ -52,7 +63,7 @@ public class GameCode extends PortableApplication {
 	//Method to generate EnemyShip
 	public void generateEnemy(EnemySpaceShip.Category e){
 		EnemySpaceShip es = new EnemySpaceShip(new Point(r.nextInt((int) width), (int) (9 * height / 10)), (float) 0,
-				2f, width / 80, 1, e);
+				2f, width / 40, 1, e);
 		ves.add(es);
 	}
 	
@@ -63,7 +74,7 @@ public class GameCode extends PortableApplication {
 	}
 	//Method to generate Boss
 	public void generateBoss(){
-		Boss b = new Boss(new Point((int)width/2,(int)height-40),5f,40f,++nBoss);
+		Boss b = new Boss(new Point((int)width/2,(int)(height-(height/6))),5f,width / 20,++nBoss);
 		boss.add(b);
 	}
 	
@@ -102,6 +113,20 @@ public class GameCode extends PortableApplication {
 	@Override
 	// Method to initials
 	public void onInit() {
+		//Import image
+		theBoss = new BitmapImage("enemyBlue1.png");
+		enemy1 = new BitmapImage("enemyGreen1.png");
+		enemy2 = new BitmapImage("enemyGreen2.png");
+		enemy3 = new BitmapImage("enemyGreen3.png");
+		ourShip = new BitmapImage("enemyRed5.png");
+		enemyBullets = new BitmapImage("laserBlue13.png");
+		ourBullets = new BitmapImage("laserRed16.png");
+		shield = new BitmapImage("shield_gold.png");
+		life = new BitmapImage("playerLife1_red.png");
+		munUp = new BitmapImage("bolt_bronze.png");
+		shieldOnShip = new BitmapImage("shield3.png");
+		backGround = new BitmapImage("blue.png");
+		
 		HighScore.newHighScore = false;
 		nBoss = 0;
 	}
@@ -160,20 +185,23 @@ public class GameCode extends PortableApplication {
 			
 			//Draw score
 			g.drawString(width-100, 100, "Score :"+score);
-			//If there is no Boss increase the BossTimer
-			if(boss.size()==0){
-				bossTimer++;
-			}
-			//Generate Boss's bullets 
-			else if(timer%20==0){
-				if(boss.get(0).s.equals(Boss.State.HAPPY)){
-					generateBullet(boss.get(0).getPosition(), 0, -10, Bullets.State.ENEMY);
+		}
+		//If there is no Boss increase the BossTimer
+		if(boss.size()==0){
+			bossTimer++;
+		}
+		//Generate Boss's bullets 
+		else if(timer%20==0){
+			if(boss.get(0).s.equals(Boss.State.HAPPY)){
+				generateBullet(boss.get(0).getPosition(), 0, -10, Bullets.State.ENEMY);
 			}else generateBullet(boss.get(0).getPosition(),(float) Math.random()*20, -10, Bullets.State.ENEMY);
-			}	
+		}	
 		timer++;
-		
+
 		//Clear
 		g.clear(Color.WHITE);
+		
+		g.drawTransformedPicture(width/2, height/2, 0, width, height, backGround);
 		
 		//Generate Boss
 		if(bossTimer%1000 == 0){
@@ -195,7 +223,7 @@ public class GameCode extends PortableApplication {
 			generateItem();
 		}
 		//Generate randomly enemy
-		if(timer%50 == 0){
+		if(timer%50 == 0 && ves.size() < 4){
 			switch(r.nextInt(2)){
 			case 0:
 				generateEnemy(EnemySpaceShip.Category.ENEMY1);
@@ -239,39 +267,61 @@ public class GameCode extends PortableApplication {
 		}
 		// Draw boss
 		if(boss.size()>0){
-			g.drawCircle((float)boss.get(0).getPosition().getX(),(float)boss.get(0).getPosition().getY(),boss.get(0).hitbox, Color.BROWN);
+			g.drawTransformedPicture((float)boss.get(0).getPosition().getX(),(float)boss.get(0).getPosition().getY(), 0, boss.get(0).hitBox, boss.get(0).hitBox, theBoss );
 			boss.get(0).ticks();
 		}
 		
-		//Draw a red circle for all the EnemyShip
+		//Draw all the EnemyShip
 		for(int i = 0; i< ves.size(); i++){
-			g.drawCircle((float)ves.get(i).getPosition().getX(),(float) ves.get(i).getPosition().getY(), ves.get(i).getHitBox(), Color.RED);
+			switch(ves.get(i).category){
+			case ENEMY1:
+				g.drawTransformedPicture((float)ves.get(i).getPosition().getX(),(float)ves.get(i).getPosition().getY(), 0, ves.get(i).getHitBox(), ves.get(i).getHitBox(), enemy1);
+				break;
+			case ENEMY2:
+				g.drawTransformedPicture((float)ves.get(i).getPosition().getX(),(float)ves.get(i).getPosition().getY(), 0, ves.get(i).getHitBox(), ves.get(i).getHitBox(), enemy2);
+				break;
+			case ENEMY3:
+				g.drawTransformedPicture((float)ves.get(i).getPosition().getX(),(float)ves.get(i).getPosition().getY(), 0, ves.get(i).getHitBox(), ves.get(i).getHitBox(), enemy3);
+				break;
+			}
 			ves.get(i).tick();
 		}
-		//Draw a black circle for all the bullets
+		//Draw all the bullets
 		for(int j = 0; j< bullets.size();j++){
-			g.drawCircle((float)bullets.get(j).getPosition().getX(),(float) bullets.get(j).getPosition().getY(), bullets.get(j).getHitBox(), Color.BLACK);
+			if(bullets.get(j).getState()== State.ENEMY){
+				g.drawTransformedPicture((float)bullets.get(j).getPosition().getX(),(float)bullets.get(j).getPosition().getY(), 0, bullets.get(j).getHitBox()/2, bullets.get(j).getHitBox(), enemyBullets);
+			}else
+				g.drawTransformedPicture((float)bullets.get(j).getPosition().getX(),(float)bullets.get(j).getPosition().getY(), 0, bullets.get(j).getHitBox()/2, bullets.get(j).getHitBox(), ourBullets);
 			bullets.get(j).tick();
 		}
-		// Draw a gold circle for Items
+		// Draw Items
 		for(int k = 0; k< item.size();k++){
-			g.drawAntiAliasedCircle((float)item.get(k).getPosition().getX(),(float) item.get(k).getPosition().getY(), item.get(k).getHitbox(), Color.GOLD);
+			switch(item.get(k).getUtility()){
+			case shield:
+				g.drawTransformedPicture((float)item.get(k).getPosition().getX(),(float)item.get(k).getPosition().getY(), 0, item.get(k).getHitBox(), item.get(k).getHitBox(), shield);
+				break;
+			case life:
+				g.drawTransformedPicture((float)item.get(k).getPosition().getX(),(float)item.get(k).getPosition().getY(), 0, item.get(k).getHitBox(), item.get(k).getHitBox(), life);
+				break;
+			case munUpgrade:
+				g.drawTransformedPicture((float)item.get(k).getPosition().getX(),(float)item.get(k).getPosition().getY(), 0, item.get(k).getHitBox(), item.get(k).getHitBox(), munUp);
+				break;
+			}
 			item.get(k).tick();
 		}
 		
-		//Draw a blue circle for OurSpaceShip
-		g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox(), Color.BLUE);
-		
+		//Draw OurSpaceShip
+		g.drawTransformedPicture((float)os.getPosition().getX(),(float) os.getPosition().getY(), 180, os.getHitBox(), os.getHitBox(), ourShip);
+				
 		//Draw a green circle for the shield
 		if(os.shield){
-			g.drawCircle((float)os.getPosition().getX(),(float) os.getPosition().getY(),os.getHitBox()+10, Color.GREEN);
-			
+			g.drawTransformedPicture((float)os.getPosition().getX(),(float) os.getPosition().getY(), 0, os.getHitBox()+20, os.getHitBox()+20, shieldOnShip);
 		}os.ticks();
 		
 		//Call the method tick() from Collision at all refresh
 		Collision.tick();
 			}	
-	}
+	
 	
 	//Main method to launch the game
 	public static void main(String[] args) {

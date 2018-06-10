@@ -16,13 +16,13 @@ public class Boss {
 	Point p;
 	float Vx;
 	public State s ;
-	public float hitbox;
+	public float hitBox;
 	
 	//Constructor
-	public Boss(Point p, float Vx, float hitbox,int nBoss){
+	public Boss(Point p, float Vx, float hitBox,int nBoss){
 		this.p = p;
 		this.Vx = Vx;
-		this.hitbox = hitbox;
+		this.hitBox = hitBox;
 		this.hp = 100*nBoss;
 		s = State.HAPPY;
 		 
@@ -34,8 +34,8 @@ public class Boss {
 	}
 	
 	//Method to get the hitbox
-	public float getHitbox(){
-		return  hitbox;
+	public float getHitBox(){
+		return  hitBox;
 	}
 	
 	//Method to lower the Boss's life
@@ -55,7 +55,7 @@ public class Boss {
 		}
 		else s = State.HAPPY;
 		
-		if(p.getX()+ Vx <= hitbox||p.getX()+Vx >= GameCode.width-hitbox)
+		if(p.getX()+ Vx <= hitBox||p.getX()+Vx >= GameCode.width-hitBox)
 			this.Vx *=-1;
 		p.setLocation(p.getX() + Vx, p.getY());
 		
