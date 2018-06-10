@@ -9,6 +9,7 @@ public class HighScore {
 	
 	//Class attributes
 	public static int highScore [] = new int [10];
+	public static String names[] = new String[10];
 	public static boolean newHighScore = false;
 	
 	
@@ -19,7 +20,11 @@ public class HighScore {
 			if(toCheck > highScore[i]){
 				for(int j = highScore.length-1; j>i;j--){
 					highScore[j]=highScore[j-1];
+					names[j]=names[j-1];
 				}
+			highScore[i]=toCheck;
+		//	names[i]= GameCode.player;
+			continue;
 				
 			}
 			
