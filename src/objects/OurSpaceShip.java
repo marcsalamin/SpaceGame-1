@@ -81,6 +81,8 @@ public class OurSpaceShip {
 			case LEVEL2 :
 				l = Level.LEVEL3;
 				break;
+			case LEVEL3 :
+				break;
 				
 				
 			}
