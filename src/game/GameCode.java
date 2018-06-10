@@ -125,7 +125,7 @@ public class GameCode extends PortableApplication {
 		life = new BitmapImage("playerLife1_red.png");
 		munUp = new BitmapImage("bolt_bronze.png");
 		shieldOnShip = new BitmapImage("shield3.png");
-		backGround = new BitmapImage("blue.png");
+		backGround = new BitmapImage("space_font.png");
 		
 		HighScore.newHighScore = false;
 		nBoss = 0;
@@ -162,30 +162,34 @@ public class GameCode extends PortableApplication {
 			if(HighScore.newHighScore){
 			g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
 			}
+			g.drawStringCentered(height/2-150, "Would you play again? Y/N");
+			//lire entrée utilisateur + rejouer si y ou exit si n
 		}
 		else{
-			g.setColor(Color.BLACK);
+//			g.setColor(Color.BLACK);
 			//Draw life
-			if(os.getHealth()> 3){
-				g.drawString(30, 100, "Life : "+os.getHealth()+" <3");
-			}
-			else if(os.getHealth()==3){
-				g.drawString(30, 100, "Life : <3 <3 <3");
-				
-			}
-			else if(os.getHealth()==2){
-				g.drawString(30, 100, "Life : <3 <3");
-				
-			}
-			else if(os.getHealth()==1){
-				g.drawString(30, 100, "Life : <3");
-				
-			}
+//			if(os.getHealth()> 3){
+//				g.drawString(30, 100, "Life : "+os.getHealth()+" <3");
+//			}
+//			else if(os.getHealth()==3){
+//				g.drawString(30, 100, "Life : <3 <3 <3");
+//				
+//			}
+//			else if(os.getHealth()==2){
+//				g.drawString(30, 100, "Life : <3 <3");
+//				
+//			}
+//			else if(os.getHealth()==1){
+//				g.drawString(30, 100, "Life : <3");
 			
 			
 			//Draw score
 			g.drawString(width-100, 100, "Score :"+score);
 		}
+		for(int l = 0; l<os.getHealth(); l++){
+			g.drawTransformedPicture(width + l*100, height, 0f, height/80, height/80, life);	
+		}
+		
 		//If there is no Boss increase the BossTimer
 		if(boss.size()==0){
 			bossTimer++;
