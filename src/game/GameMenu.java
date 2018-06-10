@@ -29,12 +29,9 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  *
  */
 public class GameMenu extends JFrame{
-	public static boolean gameMenu = true;
-
-
-	
 
 	GameMenu(){
+	
 		setTitle("Space Shooter");
 		setSize((int)GameCode.width/10,(int)GameCode.height/10);
 		setLocation(new Point((int)GameCode.width/2,(int)GameCode.height/2));
@@ -46,6 +43,8 @@ public class GameMenu extends JFrame{
 		
 		play.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				GameCode.gameOver = false;
+				GameCode.onlyOne = true;
 				dispose();
 				new GameCode();
 			}

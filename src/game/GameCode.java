@@ -42,6 +42,7 @@ public class GameCode extends PortableApplication {
 	static int bossTimer;
 	static int score = 0;
 	static int nBoss;
+	static boolean onlyOne = true;
 	static boolean gameOver = false;
 	
 	//Pictures
@@ -154,7 +155,7 @@ public class GameCode extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		
 		//Write GameOver and the number of enemy that u killed (1p for enemy, 5p for Boss)
-		if(gameOver){
+		if(gameOver&&onlyOne){
 			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
@@ -163,11 +164,14 @@ public class GameCode extends PortableApplication {
 			if(HighScore.newHighScore){
 			g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
 			}
-			g.drawStringCentered(height/2-150, "Would you play again? Y/N");
-			//lire entrée utilisateur + rejouer si y ou exit si n
+			
+			new GameMenu();
+			onlyOne = false;
+			
+	
 			
 		}
-		else{
+		if(!gameOver){
 			g.setColor(Color.WHITE);
 
 			
