@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 
+import ch.hevs.gdx2d.components.audio.MusicPlayer;
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
@@ -50,7 +51,8 @@ public class GameCode extends RenderingScreen {
 	static boolean onlyOne = true;
 	static boolean gameOver = false;
 	static String player = "" ;
-//	Musique ambianceMusic = new Musique("8-bit Detective.wav");
+	//Musique ambianceMusic = new Musique("8-bit Detective.wav");
+	MusicPlayer ambianceMusic = new MusicPlayer("8-bit Detective.wav");
 	//Pictures
 	BitmapImage theBoss;
 	BitmapImage enemy1, enemy2, enemy3;
@@ -63,7 +65,7 @@ public class GameCode extends RenderingScreen {
 	//Constructor
 	public GameCode(){
 	}
-//	ambianceMusic.play();
+
 	//Create a random variable who stay fix 
 	Random r = new Random(124345);
 
@@ -125,6 +127,8 @@ public class GameCode extends RenderingScreen {
 	@Override
 	// Method to initials
 	public void onInit() {
+		//play the sound
+		ambianceMusic.loop();
 		//name the player
 		player = GameMenu.name.getText();
 		//clear all the arraylist
@@ -186,6 +190,7 @@ public class GameCode extends RenderingScreen {
 
 		//Write GameOver and the number of enemy that u killed (1p for enemy, 5p for Boss)
 		if(gameOver){
+			ambianceMusic.stop();
 			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
