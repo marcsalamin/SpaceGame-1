@@ -194,7 +194,7 @@ public class GameCode extends RenderingScreen {
 			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
-//			HighScore.ranking(score);
+			GameStart.highScore.ranking(score);
 			g.drawStringCentered(height/2-50,"You killed "+ score + " enemys");
 //			if(HighScore.newHighScore){
 //				g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");

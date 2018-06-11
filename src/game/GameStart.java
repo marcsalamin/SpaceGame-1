@@ -25,6 +25,7 @@ public class GameStart extends PortableApplication {
 	static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 	public static float height = (float) dimension.getHeight();
 	public static float width = (float) dimension.getWidth() / 2;
+	public static HighScore highScore = new HighScore();
 
 	GameStart() {
 		super((int) width, (int) height);
@@ -36,7 +37,8 @@ public class GameStart extends PortableApplication {
 		Logger.log("Press enter/space to show the next screen, 1/2/3 to transition to them");
 		s.registerScreen(GameMenu.class);
 		s.registerScreen(GameCode.class);
-		s.registerScreen(HighScore.class);
+		s.registerScreen(HighScoreMenu.class);
+
 	}
 
 	@Override

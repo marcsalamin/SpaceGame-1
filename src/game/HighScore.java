@@ -17,18 +17,13 @@ class Score {
 	String name = "Player";
 }
 
-public class HighScore extends RenderingScreen {
+public class HighScore {
 
 	// Class attributes
 	public Score highScore[] = new Score[10];
 	public boolean newHighScore = false;
 
-	@Override
-	public void onKeyDown(int keycode) {
-		// TODO Auto-generated method stub
-		super.onKeyDown(keycode);
-		System.out.println(keycode);
-	}
+
 
 	// Method to sort
 	public void sorting() {
@@ -60,25 +55,10 @@ public class HighScore extends RenderingScreen {
 			sorting();
 		}
 	}
-
-	public void onGraphicRender(GdxGraphics h) {
-		h.clear(Color.BLACK);
-		h.setColor(Color.WHITE);
-		h.drawString(GameCode.width / 2, GameCode.height - 180, "Player        Score");
-		for (int i = 0; i < highScore.length; i++) {
-
-			h.drawString(GameCode.width / 2, GameCode.height - 200 - (i * 20), highScore[i].name +"           "+ highScore[i].value);
-		}
-	}
-
-	@Override
-	public void onInit() {
-		System.out.println("Pouet");
+	public HighScore(){
 		for (int i = 0; i < highScore.length; i++) {
 			highScore[i] = new Score();
 
 		}
-		// TODO Auto-generated method stub
-
 	}
 }
