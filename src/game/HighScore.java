@@ -35,7 +35,7 @@ public class HighScore {
 
 			@Override
 			public int compare(Score o1, Score o2) {
-				return o1.value > o2.value ? 1 : -1;
+				return o1.value > o2.value ? -1 : 1;
 			}
 
 		});
@@ -54,6 +54,10 @@ public class HighScore {
 			highScore[9].name = GameCode.player;
 			sorting();
 		}
+		
+	
+
+
 	}
 	public HighScore(){
 		for (int i = 0; i < highScore.length; i++) {

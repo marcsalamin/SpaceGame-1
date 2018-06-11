@@ -159,7 +159,7 @@ public class GameCode extends RenderingScreen {
 		timer = 0;
 		bossTimer = 0;
 		score = 0;
-		
+		onlyOne = true;
 	}
 
 	@Override
@@ -194,7 +194,10 @@ public class GameCode extends RenderingScreen {
 			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
+			if(onlyOne){
 			GameStart.highScore.ranking(score);
+			onlyOne=false;
+			}
 			g.drawStringCentered(height/2-50,"You killed "+ score + " enemys");
 //			if(HighScore.newHighScore){
 //				g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
