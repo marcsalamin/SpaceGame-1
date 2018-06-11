@@ -21,6 +21,7 @@ import objects.Bullets.State;
 import objects.EnemySpaceShip;
 import objects.Items;
 import objects.OurSpaceShip;
+import objects.Stars;
 
 /**
  * @author Philippine Favre et Marc Salamin
@@ -39,15 +40,17 @@ public class GameCode extends RenderingScreen {
 	public static ArrayList <EnemySpaceShip> ves = new ArrayList <EnemySpaceShip>();
 	public static ArrayList<Items> item = new ArrayList<Items>();
 	public static ArrayList<Boss> boss = new ArrayList<Boss>();
+	public static ArrayList<Stars> stars = new ArrayList<Stars>();
 	public static OurSpaceShip os;
 	static int timer;
 	static int bossTimer;
+	static int backGroundTimer;
 	static int score = 0;
 	static int nBoss;
 	static boolean onlyOne = true;
 	static boolean gameOver = false;
-	static String player ;
-
+	static String player = "" ;
+//	Musique ambianceMusic = new Musique("8-bit Detective.wav");
 	//Pictures
 	BitmapImage theBoss;
 	BitmapImage enemy1, enemy2, enemy3;
@@ -55,12 +58,12 @@ public class GameCode extends RenderingScreen {
 	BitmapImage enemyBullets, ourBullets;
 	BitmapImage shield, life, munUp;
 	BitmapImage shieldOnShip;
-	BitmapImage backGround;
+	BitmapImage star;
 
 	//Constructor
 	public GameCode(){
 	}
-
+//	ambianceMusic.play();
 	//Create a random variable who stay fix 
 	Random r = new Random(124345);
 
@@ -80,6 +83,11 @@ public class GameCode extends RenderingScreen {
 	public void generateBoss(){
 		Boss b = new Boss(new Point((int)width/2,(int)(height-(height/6))),5f,width / 20,++nBoss);
 		boss.add(b);
+	}
+	//Method to generate Stars
+	public void generateStar(){
+		Stars s = new Stars(new Point((int)(Math.random()*width),(int)(height)));
+		stars.add(s);
 	}
 
 	//Method to generate Item depending the level of our spaceShip
@@ -124,6 +132,7 @@ public class GameCode extends RenderingScreen {
 		ves.clear();
 		item.clear();
 		boss.clear();
+		stars.clear();
 		
 		//build our spaceship
 		os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/40, 3, OurSpaceShip.Level.LEVEL1);
@@ -139,9 +148,9 @@ public class GameCode extends RenderingScreen {
 		life = new BitmapImage("playerLife1_red.png");
 		munUp = new BitmapImage("bolt_bronze.png");
 		shieldOnShip = new BitmapImage("shield3.png");
-		backGround = new BitmapImage("space_font.png");
+		star = new BitmapImage("etoile.png");
 
-		HighScore.newHighScore = false;
+//		HighScore.newHighScore = false;
 		nBoss = 0;
 		timer = 0;
 		bossTimer = 0;
@@ -170,20 +179,21 @@ public class GameCode extends RenderingScreen {
 	// Graph and timer to generate all
 	public void onGraphicRender(GdxGraphics g) {
 		//Clear
-		g.clear(Color.WHITE);
+		g.clear(Color.BLACK);
+		
+		
 
-		g.drawTransformedPicture(width/2, height/2, 0, width, height, backGround);
 
 		//Write GameOver and the number of enemy that u killed (1p for enemy, 5p for Boss)
 		if(gameOver){
 			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
-			HighScore.ranking(score);
+//			HighScore.ranking(score);
 			g.drawStringCentered(height/2-50,"You killed "+ score + " enemys");
-			if(HighScore.newHighScore){
-				g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
-			}
+//			if(HighScore.newHighScore){
+//				g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
+//			}
 			g.drawStringCentered(height/2-150, "Press space to acces to the menu");
 			KeyListener listener = new KeyListener(){
 
@@ -198,14 +208,10 @@ public class GameCode extends RenderingScreen {
 
 				@Override
 				public void keyReleased(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-
 				}
 
 				@Override
 				public void keyTyped(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-
 				}
 			};
 
@@ -231,7 +237,10 @@ public class GameCode extends RenderingScreen {
 				}
 			}
 
-
+			//generate stars
+			if(timer%20==0){
+				generateStar();
+			}
 			//If there is no Boss increase the BossTimer
 			if(boss.size()==0){
 				bossTimer++;
@@ -248,7 +257,7 @@ public class GameCode extends RenderingScreen {
 					generateBullet(boss.get(0).getPosition(),(float) Math.random()*20*sign, -10, Bullets.State.ENEMY);
 				}
 			}	
-			timer++;	
+			timer++;
 
 			//Generate Boss
 			if(bossTimer%1000 == 0){
@@ -363,6 +372,14 @@ public class GameCode extends RenderingScreen {
 				for(int i = 0; i< ves.size(); i++){
 					generateBullet(ves.get(i).getPosition(),0,-10,Bullets.State.ENEMY);
 				}
+			}
+			//Draw stars
+			if(stars.size()>0){
+				for(int i = 0; i < stars.size();i++){
+					g.drawTransformedPicture((float)stars.get(i).getPosition().getX(),(float)stars.get(i).getPosition().getY(), 0, 40, 40, star );
+					stars.get(i).tick();
+				}
+				
 			}
 			// Draw boss
 			if(boss.size()>0){

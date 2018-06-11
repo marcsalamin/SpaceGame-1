@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.ScreenManager;
+import ch.hevs.gdx2d.lib.ScreenManager.TransactionType;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
 /**
@@ -66,7 +67,7 @@ public class GameStart extends PortableApplication {
 			s.getActiveScreen().onKeyDown(keycode);
 
 			if (keycode == Input.Keys.SPACE)
-				s.smoothTransitionToNext();
+				s.transitionTo(0, TransactionType.SMOOTH);;
 		}
 	}
 

@@ -1,6 +1,7 @@
 package game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -85,20 +86,29 @@ public class GameMenu extends RenderingScreen{
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 
-				if (newGameButton.isChecked()){
+				
 					GameCode.gameOver = false;
 					onDispose();
 					stage.unfocusAll();
-					GameStart.s.smoothTransitionToNext();
-				}else{
-					//GameStart.s.transitionTo(3,TransactionType.SMOOTH);
-					GameStart.s.smoothTransitionToNext();
-					GameStart.s.smoothTransitionToNext();
+					GameStart.s.transitionTo(1,TransactionType.SMOOTH);
+					//GameStart.s.smoothTransitionToNext();
+					
+				
+				
+
+
 						
 						
 				
 				
-				}
+				
+			}
+		});
+		scoreButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+					GameStart.s.transitionTo(2,TransactionType.SMOOTH);	
 			}
 		});
 	}
