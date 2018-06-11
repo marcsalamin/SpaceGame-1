@@ -1,14 +1,7 @@
 package game;
 
-import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,66 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.oracle.jrockit.jfr.Transition;
 
-//import ch.hevs.gdx2d.demos.menus.DemoGUI;
-import ch.hevs.gdx2d.desktop.PortableApplication;
+import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
+import ch.hevs.gdx2d.lib.ScreenManager.TransactionType;
 import ch.hevs.gdx2d.lib.utils.Logger;
-
-/**
- * @author Philippine Favre et Marc Salamin
- * Class to manage the menu at the beginning
- *
- */
-//public class GameMenu extends JFrame{
-//
-//	GameMenu(){
-//	
-//		setTitle("Space Shooter");
-//		setSize((int)GameCode.width/10,(int)GameCode.height/10);
-//		setLocation(new Point((int)GameCode.width/2,(int)GameCode.height/2));
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setLayout(new GridLayout(2, 1));
-//		
-//		JButton play = new JButton("Play");
-//		JButton score = new JButton("Score");
-//		
-//		play.addActionListener(new ActionListener(){
-//			public void actionPerformed(ActionEvent e){
-//				GameCode.gameOver = false;
-//				dispose();
-//				new GameCode();
-//			}
-//		});
-//		score.addActionListener(new ActionListener(){
-//			public void actionPerformed(ActionEvent e){
-//				for(int i = 0; i<HighScore.highScore.length;i++){
-//					System.out.println(HighScore.highScore[i]);
-//				}
-//		
-//			}
-//		});
-//		add(play);
-//		add(score);
-//		setVisible(true);
-//		
-//		
-//	}
-//
-//}
-
-import ch.hevs.gdx2d.desktop.PortableApplication;
-import ch.hevs.gdx2d.lib.GdxGraphics;
-import ch.hevs.gdx2d.lib.utils.Logger;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Very simple UI demonstration
@@ -84,22 +23,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * @author Pierre-André Mudry (mui)
  * @version 1.1
  */
-public class GameMenu extends PortableApplication {
+public class GameMenu extends RenderingScreen{
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton, scoreButton;
-	TextField name;
+	static TextField name;
 
 	@Override
 	public void onInit() {
 		int buttonWidth = 180;
 		int buttonHeight = 30;
 
-		setTitle("Menu");
-
 		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);// Make the stage consume events
-
+		
+//		setTitle("Menu");
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(stage);
+		multiplexer.addProcessor(Gdx.input.getInputProcessor());
+		Gdx.input.setInputProcessor(multiplexer);
+				
 		// Load the default skin (which can be configured in the JSON file)
 		skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"));
 
@@ -146,11 +88,16 @@ public class GameMenu extends PortableApplication {
 				if (newGameButton.isChecked()){
 					GameCode.gameOver = false;
 					onDispose();
-					new GameCode();
+					stage.unfocusAll();
+					GameStart.s.smoothTransitionToNext();
 				}else{
-					for(int i = 0; i<HighScore.highScore.length;i++){
-						System.out.println(HighScore.highScore[i]);
-					}
+					//GameStart.s.transitionTo(3,TransactionType.SMOOTH);
+					GameStart.s.smoothTransitionToNext();
+					GameStart.s.smoothTransitionToNext();
+						
+						
+				
+				
 				}
 			}
 		});
@@ -164,15 +111,14 @@ public class GameMenu extends PortableApplication {
 		stage.act();
 		stage.draw();
 
-		g.drawStringCentered(getWindowHeight() / 4, "Button status " + newGameButton.isChecked());
+		g.drawStringCentered(g.getScreenHeight() / 4, "Button status " + newGameButton.isChecked());
 		g.drawSchoolLogo();
 		g.drawFPS();
 	}
 
-	@Override
 	public void onDispose() {
-		super.onDispose();
 		stage.dispose();
 		skin.dispose();
 	}
+	
 }

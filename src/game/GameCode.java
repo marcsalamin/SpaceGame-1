@@ -6,20 +6,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.Vector;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
-import ch.hevs.gdx2d.desktop.PortableApplication;
+import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
+import ch.hevs.gdx2d.lib.utils.Logger;
 import objects.Boss;
 import objects.Bullets;
 import objects.Bullets.State;
 import objects.EnemySpaceShip;
-import objects.EnemySpaceShip.Category;
 import objects.Items;
 import objects.OurSpaceShip;
 
@@ -28,7 +27,7 @@ import objects.OurSpaceShip;
  * Main class. We use gdx2D
  *
  */
-public class GameCode extends PortableApplication {
+public class GameCode extends RenderingScreen {
 
 	//Recovery screen data
 	static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -40,13 +39,14 @@ public class GameCode extends PortableApplication {
 	public static ArrayList <EnemySpaceShip> ves = new ArrayList <EnemySpaceShip>();
 	public static ArrayList<Items> item = new ArrayList<Items>();
 	public static ArrayList<Boss> boss = new ArrayList<Boss>();
-	public static OurSpaceShip os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/40, 3, OurSpaceShip.Level.LEVEL1);
+	public static OurSpaceShip os;
 	static int timer;
 	static int bossTimer;
 	static int score = 0;
 	static int nBoss;
 	static boolean onlyOne = true;
 	static boolean gameOver = false;
+	static String player ;
 
 	//Pictures
 	BitmapImage theBoss;
@@ -59,7 +59,6 @@ public class GameCode extends PortableApplication {
 
 	//Constructor
 	public GameCode(){
-		super((int)width,(int) height);
 	}
 
 	//Create a random variable who stay fix 
@@ -118,6 +117,16 @@ public class GameCode extends PortableApplication {
 	@Override
 	// Method to initials
 	public void onInit() {
+		//name the player
+		player = GameMenu.name.getText();
+		//clear all the arraylist
+		bullets.clear();
+		ves.clear();
+		item.clear();
+		boss.clear();
+		
+		//build our spaceship
+		os = new OurSpaceShip(new Point((int)width/2, (int)height/4), (float) 0, (float)0, width/40, 3, OurSpaceShip.Level.LEVEL1);
 		//Import image
 		theBoss = new BitmapImage("enemyBlue1.png");
 		enemy1 = new BitmapImage("enemyGreen1.png");
@@ -134,6 +143,10 @@ public class GameCode extends PortableApplication {
 
 		HighScore.newHighScore = false;
 		nBoss = 0;
+		timer = 0;
+		bossTimer = 0;
+		score = 0;
+		
 	}
 
 	@Override
@@ -171,15 +184,15 @@ public class GameCode extends PortableApplication {
 			if(HighScore.newHighScore){
 				g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
 			}
-			g.drawStringCentered(height/2-150, "Would you play again? Y/N");
+			g.drawStringCentered(height/2-150, "Press space to acces to the menu");
 			KeyListener listener = new KeyListener(){
 
 				@Override
 				public void keyPressed(KeyEvent arg0) {
-					if(arg0.getKeyChar() == 'y' || arg0.getKeyChar() == 'Y'){
+					if(arg0.getKeyChar() == ' ' ){
 						gameOver = false;
 						new GameCode();
-						System.out.println("je veux recommencer");
+
 					}
 				}
 
@@ -253,7 +266,7 @@ public class GameCode extends PortableApplication {
 			}
 
 			//Generate Item
-			if(timer%700 == 0){
+			if(timer%600 == 0){
 				generateItem();
 			}
 			//Generate randomly enemy, difficulty increase with nbBoss
@@ -408,14 +421,4 @@ public class GameCode extends PortableApplication {
 			Collision.tick();
 		}
 	}
-
-
-	//Main method to launch the game
-	public static void main(String[] args) {
-		//new GameMenu();
-		new GameCode(); 
-	}
-
-
-
 }

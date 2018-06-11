@@ -1,5 +1,9 @@
 package game;
 
+import com.badlogic.gdx.graphics.Color;
+
+import ch.hevs.gdx2d.lib.GdxGraphics;
+
 /**
  * @author Philippine Favre et Marc Salamin
  *Class for the High Score
@@ -23,9 +27,8 @@ public class HighScore {
 					names[j]=names[j-1];
 				}
 			highScore[i]=toCheck;
-		//	names[i]= GameCode.player;
+			names[i]= GameCode.player;
 			continue;
-				
 			}
 			
 		}
@@ -43,5 +46,12 @@ public class HighScore {
 			System.out.println(highScore[i]);
 		}
 	}
-
+	public void onGraphicRender(GdxGraphics h) {
+		h.clear(Color.BLACK);
+		h.setColor(Color.WHITE);
+		for(int i = 0; i<HighScore.highScore.length;i++){
+			h.drawString(50, i*10+10, HighScore.names[i]);
+			h.drawString(200, i*10+10,"" + HighScore.highScore[i]);
+		}
+	}
 }
