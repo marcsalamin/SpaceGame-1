@@ -51,7 +51,7 @@ public class GameCode extends RenderingScreen {
 	static boolean onlyOne = true;
 	static boolean gameOver = false;
 	static String player = "" ;
-	//Musique ambianceMusic = new Musique("8-bit Detective.wav");
+	//Music 
 	MusicPlayer ambianceMusic = new MusicPlayer("8-bit Detective.wav");
 	//Pictures
 	BitmapImage theBoss;
@@ -92,7 +92,7 @@ public class GameCode extends RenderingScreen {
 		stars.add(s);
 	}
 
-	//Method to generate Item depending the level of our spaceShip
+	//Method to generate Item 
 	public void generateItem(){
 		Point p = new Point(r.nextInt((int) width), (int) (9 * height / 10));
 		float Vx = 0;
@@ -154,7 +154,7 @@ public class GameCode extends RenderingScreen {
 		shieldOnShip = new BitmapImage("shield3.png");
 		star = new BitmapImage("etoile.png");
 
-//		HighScore.newHighScore = false;
+		//reboot attributes
 		nBoss = 0;
 		timer = 0;
 		bossTimer = 0;
@@ -190,18 +190,17 @@ public class GameCode extends RenderingScreen {
 
 		//Write GameOver and the number of enemy that u killed (1p for enemy, 5p for Boss)
 		if(gameOver){
+			//Stop the music
 			ambianceMusic.stop();
 			g.setColor(Color.WHITE);
 			g.clear();
 			g.drawStringCentered(height/2, "GAME OVER");
+			//add only one time the score in the array of score if you did a top 10
 			if(onlyOne){
 			GameStart.highScore.ranking(score);
 			onlyOne=false;
 			}
 			g.drawStringCentered(height/2-50,"You killed "+ score + " enemys");
-//			if(HighScore.newHighScore){
-//				g.drawStringCentered(height/2-100, "Congratulation you did a new high Score !!!");
-//			}
 			g.drawStringCentered(height/2-150, "Press space to acces to the menu");
 			KeyListener listener = new KeyListener(){
 
@@ -228,13 +227,21 @@ public class GameCode extends RenderingScreen {
 
 
 		}
+		//Generate all the things you need to play
 		if(!gameOver){
+			//increase the timer 
+			timer++;
 			g.setColor(Color.WHITE);
+			
+			//generate stars
+			if(timer%20==0){
+				generateStar();
+			}
 
 			//Draw score
 			g.drawString(width-100, 100, "Score :"+score);
 
-			//Draw Life
+			//Draw Life(3 pictures or 1 picture and the number of life if you have more than 3 life)
 			if(os.getHealth()> 3){
 				g.drawString(30, 100,os.getHealth()+"X");
 				g.drawTransformedPicture(100, 100, 0f, height/80, height/80, life);
@@ -245,15 +252,12 @@ public class GameCode extends RenderingScreen {
 				}
 			}
 
-			//generate stars
-			if(timer%20==0){
-				generateStar();
-			}
+			
 			//If there is no Boss increase the BossTimer
 			if(boss.size()==0){
 				bossTimer++;
 			}
-			//Generate Boss's bullets 
+			//Generate Boss's bullets (without Vx if the boss is happy)
 			else if(timer%20==0){
 				if(boss.get(0).s.equals(Boss.State.HAPPY)){
 					generateBullet(boss.get(0).getPosition(), 0, -10, Bullets.State.ENEMY);
@@ -265,7 +269,7 @@ public class GameCode extends RenderingScreen {
 					generateBullet(boss.get(0).getPosition(),(float) Math.random()*20*sign, -10, Bullets.State.ENEMY);
 				}
 			}	
-			timer++;
+			
 
 			//Generate Boss
 			if(bossTimer%1000 == 0){
