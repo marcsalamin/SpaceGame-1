@@ -21,9 +21,7 @@ public class HighScore {
 
 	// Class attributes
 	public Score highScore[] = new Score[10];
-	public boolean newHighScore = false;
-
-
+	public static boolean newHighScore = false;
 
 	// Method to sort
 	public void sorting() {
@@ -54,12 +52,11 @@ public class HighScore {
 			highScore[9].name = GameCode.player;
 			sorting();
 		}
-		
-	
-
 
 	}
-	public HighScore(){
+
+	// Constructor
+	public HighScore() {
 		for (int i = 0; i < highScore.length; i++) {
 			highScore[i] = new Score();
 

@@ -24,39 +24,42 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  * @author Pierre-André Mudry (mui)
  * @version 1.1
  */
-public class GameMenu extends RenderingScreen{
+public class GameMenu extends RenderingScreen {
+	// class attributes
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton, scoreButton;
 	static TextField name;
 
+	// Method to initials
 	@Override
 	public void onInit() {
 		int buttonWidth = 180;
 		int buttonHeight = 30;
 
 		stage = new Stage();
-		
-//		setTitle("Menu");
+
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);
 		multiplexer.addProcessor(Gdx.input.getInputProcessor());
 		Gdx.input.setInputProcessor(multiplexer);
-				
+
 		// Load the default skin (which can be configured in the JSON file)
 		skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"));
-
-		newGameButton = new TextButton("new Game", skin); // Use the initialized skin
+		// Create the button "play"
+		newGameButton = new TextButton("new Game", skin); // Use the initialized
+															// skin
 		newGameButton.setWidth(buttonWidth);
 		newGameButton.setHeight(buttonHeight);
-
-		scoreButton = new TextButton("The top 10", skin); // Use the initialized skin
+		// Create the button "top 10"
+		scoreButton = new TextButton("The top 10", skin); // Use the initialized
+															// skin
 		scoreButton.setWidth(buttonWidth);
 		scoreButton.setHeight(buttonHeight);
-
+		// Select the place of those button
 		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .6));
 		scoreButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
-
+		// Create a zone to write the player's name
 		name = new TextField("Enter your name", skin);
 		name.setWidth(buttonWidth);
 		name.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
@@ -81,34 +84,25 @@ public class GameMenu extends RenderingScreen{
 		/**
 		 * Register listener
 		 */
+		// Go to the Game
 		newGameButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 
-				
-					GameCode.gameOver = false;
-					onDispose();
-					stage.unfocusAll();
-					GameStart.s.transitionTo(1,TransactionType.SMOOTH);
-					//GameStart.s.smoothTransitionToNext();
-					
-				
-				
+				GameCode.gameOver = false;
+				onDispose();
+				stage.unfocusAll();
+				GameStart.s.transitionTo(1, TransactionType.SMOOTH);
 
-
-						
-						
-				
-				
-				
 			}
 		});
+		// Go to the top 10 menu
 		scoreButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
-					GameStart.s.transitionTo(2,TransactionType.SMOOTH);	
+				GameStart.s.transitionTo(2, TransactionType.SMOOTH);
 			}
 		});
 	}
@@ -120,15 +114,16 @@ public class GameMenu extends RenderingScreen{
 		// This is required for having the GUI work properly
 		stage.act();
 		stage.draw();
-
+		// write button status, logo of the school, and FPS
 		g.drawStringCentered(g.getScreenHeight() / 4, "Button status " + newGameButton.isChecked());
 		g.drawSchoolLogo();
 		g.drawFPS();
 	}
 
+	// Close windows
 	public void onDispose() {
 		stage.dispose();
 		skin.dispose();
 	}
-	
+
 }

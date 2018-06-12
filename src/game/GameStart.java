@@ -19,7 +19,7 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  * @version 1.1
  */
 public class GameStart extends PortableApplication {
-
+	// Class attributes
 	static public ScreenManager s = new ScreenManager();
 	private int transactionTypeId;
 	static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -27,14 +27,17 @@ public class GameStart extends PortableApplication {
 	public static float width = (float) dimension.getWidth() / 2;
 	public static HighScore highScore = new HighScore();
 
+	// Method to start the game
 	GameStart() {
 		super((int) width, (int) height);
 	}
 
+	// Method to initials
 	@Override
 	public void onInit() {
+
 		setTitle("Multiple screens and transitions");
-		Logger.log("Press enter/space to show the next screen, 1/2/3 to transition to them");
+		Logger.log("Press space to access to the menu");
 		s.registerScreen(GameMenu.class);
 		s.registerScreen(GameCode.class);
 		s.registerScreen(HighScoreMenu.class);
@@ -61,6 +64,7 @@ public class GameStart extends PortableApplication {
 
 	}
 
+	// Go to the menu as default
 	@Override
 	public void onKeyDown(int keycode) {
 		super.onKeyDown(keycode);
@@ -69,10 +73,12 @@ public class GameStart extends PortableApplication {
 			s.getActiveScreen().onKeyDown(keycode);
 
 			if (keycode == Input.Keys.SPACE)
-				s.transitionTo(0, TransactionType.SMOOTH);;
+				s.transitionTo(0, TransactionType.SMOOTH);
+			;
 		}
 	}
 
+	// Main method to throw the game
 	public static void main(String[] args) {
 		new GameStart();
 	}
