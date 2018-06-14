@@ -8,8 +8,8 @@ import objects.Bullets;
 import objects.EnemySpaceShip;
 
 /**
- * @author Philippine Favre et Marc Salamin Class allowing the management of
- *         collisions
+ * @author Philippine Favre et Marc Salamin 
+ * Class allowing the management of collisions
  *
  */
 public class Collision {
@@ -49,6 +49,7 @@ public class Collision {
 		}
 		}
 		e = GameCode.ves.iterator();
+		
 		while (e.hasNext()) {
 			EnemySpaceShip enem = e.next();
 
@@ -109,7 +110,7 @@ public class Collision {
 				}
 			}
 
-			// Have we shot a enemy vessel
+			//Have we shot a enemy vessel
 			e = GameCode.ves.iterator();
 			while (e.hasNext()) {
 				EnemySpaceShip enem = e.next();
