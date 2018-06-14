@@ -12,11 +12,10 @@ import ch.hevs.gdx2d.lib.ScreenManager.TransactionType;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
 /**
- * Show how to add multiple screen and switch between them with different
- * transitions.
- *
- * @author Pierre-André Mudry (mui)
- * @version 1.1
+ * @author Philippine Favre et Marc Salamin
+ * 
+ * Main class
+ * 
  */
 public class GameStart extends PortableApplication {
 	// Class attributes

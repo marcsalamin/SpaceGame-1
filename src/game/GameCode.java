@@ -25,7 +25,8 @@ import objects.OurSpaceShip;
 import objects.Stars;
 
 /**
- * @author Philippine Favre et Marc Salamin Main class. We use gdx2D
+ * @author Philippine Favre et Marc Salamin
+ * 
  *
  */
 public class GameCode extends RenderingScreen {
@@ -188,49 +189,6 @@ public class GameCode extends RenderingScreen {
 		// Clear
 		g.clear(Color.BLACK);
 
-		// Write GameOver and the number of enemy that u killed (1p for enemy,
-		// 5p for Boss)
-		if (gameOver) {
-			// Stop the music
-			ambianceMusic.stop();
-			g.setColor(Color.WHITE);
-			g.clear();
-			g.drawStringCentered(height / 2, "GAME OVER");
-
-			// add only one time the score in the array of score if you did a
-			// top 10
-			if (onlyOne) {
-				GameStart.highScore.ranking(score);
-				onlyOne = false;
-			}
-			g.drawStringCentered(height / 2 - 50, "You killed " + score + " enemys");
-			// write new high score if you did it
-			if (HighScore.newHighScore) {
-				g.drawStringCentered(height / 2 - 150, "Congratulation you did a new High Score!!!");
-			}
-			g.drawStringCentered(height / 2 - 250, "Press space to acces to the menu");
-
-			KeyListener listener = new KeyListener() {
-
-				@Override
-				public void keyPressed(KeyEvent arg0) {
-					if (arg0.getKeyChar() == ' ') {
-						gameOver = false;
-						new GameCode();
-
-					}
-				}
-
-				@Override
-				public void keyReleased(KeyEvent arg0) {
-				}
-
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-				}
-			};
-
-		}
 		// Generate all the things you need to play
 		if (!gameOver) {
 			// increase the timer
@@ -473,6 +431,51 @@ public class GameCode extends RenderingScreen {
 
 			// Call the method tick() from Collision at all refresh
 			Collision.tick();
+		}
+		
+
+		// Write GameOver and the number of enemy that u killed (1p for enemy,
+		// 5p for Boss)
+		if (gameOver) {
+			// Stop the music
+			ambianceMusic.stop();
+			g.setColor(Color.WHITE);
+			g.clear();
+			g.drawStringCentered(height / 2, "GAME OVER");
+
+			// add only one time the score in the array of score if you did a
+			// top 10
+			if (onlyOne) {
+				GameStart.highScore.ranking(score);
+				onlyOne = false;
+			}
+			g.drawStringCentered(height / 2 - 50, "You killed " + score + " enemys");
+			// write new high score if you did it
+			if (HighScore.newHighScore) {
+				g.drawStringCentered(height / 2 - 150, "Congratulation you did a new High Score!!!");
+			}
+			g.drawStringCentered(height / 2 - 250, "Press space to acces to the menu");
+
+			KeyListener listener = new KeyListener() {
+
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					if (arg0.getKeyChar() == ' ') {
+						gameOver = false;
+						new GameCode();
+
+					}
+				}
+
+				@Override
+				public void keyReleased(KeyEvent arg0) {
+				}
+
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+				}
+			};
+
 		}
 	}
 }
